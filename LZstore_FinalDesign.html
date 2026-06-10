@@ -1,0 +1,3199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, interactive-widget=resizes-content">
+<title>LCBBBZ Store — Premium Digital Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   RESET & CSS TOKENS
+═══════════════════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --c1:#00e5c3;--c2:#7c3aed;--c3:#ec4899;--c4:#f59e0b;
+  --c1-dim:rgba(0,229,195,.15);--c2-dim:rgba(124,58,237,.15);
+  --c1-glow:rgba(0,229,195,.4);--c2-glow:rgba(124,58,237,.4);
+  --bg:#030714;--bg2:#06091f;--bg3:#0a0f2a;--bg4:#0f1535;
+  --glass:rgba(255,255,255,.03);--glass2:rgba(255,255,255,.06);--glass3:rgba(255,255,255,.1);
+  --border:rgba(255,255,255,.06);--border2:rgba(255,255,255,.1);--border3:rgba(255,255,255,.18);
+  --text:rgba(255,255,255,.93);--muted:rgba(255,255,255,.5);--dim:rgba(255,255,255,.22);
+  --success:#10b981;--warn:#f59e0b;--err:#ef4444;--info:#3b82f6;
+  --r-sm:10px;--r:16px;--r-lg:22px;--r-xl:28px;
+  --sh:0 8px 32px rgba(0,0,0,.45);--sh-lg:0 20px 60px rgba(0,0,0,.6);
+  --sh-c1:0 8px 32px rgba(0,229,195,.2);--sh-c2:0 8px 32px rgba(124,58,237,.2);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;font-family:'Plus Jakarta Sans',sans-serif}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif}
+img{max-width:100%;display:block}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.16)}
+
+/* ═══════════════════════════════════════════
+   FLOATING WHATSAPP BUTTON
+═══════════════════════════════════════════ */
+#wa-float{
+  position:fixed;right:16px;bottom:96px;z-index:850;
+  width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+  box-shadow:0 4px 20px rgba(37,211,102,.45);
+  cursor:pointer;transition:all .3s var(--ease);
+  text-decoration:none;
+  animation:waPulse 2.5s ease-in-out infinite;
+}
+#wa-float:hover{transform:scale(1.12) translateY(-3px);box-shadow:0 8px 32px rgba(37,211,102,.6);animation:none}
+@keyframes waPulse{
+  0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45)}
+  50%{box-shadow:0 4px 20px rgba(37,211,102,.45),0 0 0 10px rgba(37,211,102,.1),0 0 0 20px rgba(37,211,102,.04)}
+}
+
+/* ═══════════════════════════════════════════
+   LIVE ORDER NOTIFICATION POPUP
+═══════════════════════════════════════════ */
+#live-notif{
+  position:fixed;left:14px;bottom:88px;z-index:848;
+  max-width:calc(100vw - 80px);
+  background:rgba(6,9,31,.97);border:1px solid rgba(0,229,195,.25);
+  border-radius:16px;padding:11px 14px;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 20px rgba(0,229,195,.08);
+  transform:translateX(-140%);transition:transform .45s var(--ease);
+  pointer-events:none;
+  backdrop-filter:blur(24px);
+}
+#live-notif.show{transform:translateX(0)}
+.ln-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ln-text{font-size:12px;font-weight:700;color:var(--text);font-family:'Inter',sans-serif;line-height:1.4}
+.ln-sub{font-size:10px;color:var(--muted);margin-top:1px}
+.ln-badge{padding:2px 8px;border-radius:10px;background:rgba(0,229,195,.12);border:1px solid rgba(0,229,195,.25);font-size:9px;font-weight:800;color:var(--c1);flex-shrink:0;font-family:'Inter',sans-serif;letter-spacing:.3px}
+
+/* ═══════════════════════════════════════════
+   FAQ SECTION
+═══════════════════════════════════════════ */
+.faq-section{margin-top:28px}
+.faq-list{display:flex;flex-direction:column;gap:8px}
+.faq-item{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;
+  transition:all .3s var(--ease);
+}
+.faq-item:hover{border-color:rgba(0,229,195,.2);background:var(--glass2)}
+.faq-item.open{border-color:rgba(0,229,195,.3);background:rgba(0,229,195,.04)}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 16px;cursor:pointer;gap:10px;user-select:none;
+  font-size:14px;font-weight:700;letter-spacing:-.1px;
+}
+.faq-icon{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--glass2);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;flex-shrink:0;
+  transition:transform .3s var(--ease),background .3s var(--ease);
+  color:var(--c1);font-weight:900;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:rgba(0,229,195,.15);border-color:rgba(0,229,195,.3)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s var(--ease),padding .3s var(--ease);
+}
+.faq-item.open .faq-a{max-height:300px}
+.faq-a-inner{
+  padding:0 16px 16px;
+  font-size:13px;color:var(--muted);line-height:1.8;
+  font-family:'Inter',sans-serif;border-top:1px solid var(--border);
+  padding-top:12px;
+}
+
+/* ═══════════════════════════════════════════
+   SKELETON LOADING
+═══════════════════════════════════════════ */
+.skeleton{
+  background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.04) 75%);
+  background-size:200% 100%;
+  animation:skeletonShimmer 1.5s infinite;
+  border-radius:8px;
+}
+@keyframes skeletonShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skel-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px;display:flex;flex-direction:column;gap:10px}
+.skel-line{height:12px;width:100%}
+.skel-line.sm{width:60%;height:10px}
+.skel-line.xs{width:35%;height:9px}
+.skel-line.lg{height:16px}
+.skel-circle{width:40px;height:40px;border-radius:50%}
+.skel-box{height:60px;border-radius:var(--r)}
+
+/* ═══════════════════════════════════════════
+   STORE STATS (HOME) — counter section
+═══════════════════════════════════════════ */
+.store-stats-section{margin-top:28px}
+.store-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ss-card{
+  background:var(--glass);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px 10px;text-align:center;transition:all .3s var(--ease);position:relative;overflow:hidden;
+}
+.ss-card::before{content:'';position:absolute;bottom:-10px;right:-10px;width:50px;height:50px;border-radius:50%;background:var(--c1);opacity:.05}
+.ss-card:hover{border-color:rgba(0,229,195,.25);background:var(--glass2);transform:translateY(-2px)}
+.ss-num{font-size:24px;font-weight:900;background:linear-gradient(135deg,var(--c1),#fff 70%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.ss-lbl{font-size:10px;color:var(--muted);margin-top:5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-family:'Inter',sans-serif}
+
+/* ═══════════════════════════════════════════
+   EXPORT BUTTON
+═══════════════════════════════════════════ */
+.export-btn{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 16px;border-radius:12px;
+  background:rgba(0,229,195,.08);border:1px solid rgba(0,229,195,.22);
+  color:var(--c1);font-size:12px;font-weight:700;cursor:pointer;
+  transition:all .25s var(--ease);font-family:'Inter',sans-serif;
+  flex-shrink:0;
+}
+.export-btn:hover{background:rgba(0,229,195,.15);border-color:rgba(0,229,195,.4);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,229,195,.2)}
+.export-btn:active{transform:scale(.97)}
+
+/* ═══════════════════════════════════════════
+   LOADING SCREEN — PREMIUM UPGRADE
+═══════════════════════════════════════════ */
+#loader{
+  position:fixed;inset:0;z-index:99999;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  transition:opacity .7s var(--ease),visibility .7s var(--ease);
+  overflow:hidden;
+}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none}
+.loader-bg-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.loader-ring{position:absolute;border-radius:50%;border:1px solid transparent}
+.loader-ring:nth-child(1){width:300px;height:300px;border-color:rgba(0,229,195,.08);animation:loaderRingSpin 8s linear infinite}
+.loader-ring:nth-child(2){width:220px;height:220px;border-color:rgba(124,58,237,.1);animation:loaderRingSpin 5s linear infinite reverse}
+.loader-ring:nth-child(3){width:150px;height:150px;border-color:rgba(0,229,195,.15);animation:loaderRingSpin 3s linear infinite}
+@keyframes loaderRingSpin{to{transform:rotate(360deg)}}
+
+.loader-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:28px}
+.loader-icon-wrap{position:relative;width:80px;height:80px}
+.loader-icon-glow{position:absolute;inset:-16px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,195,.3),transparent 70%);animation:loaderGlowPulse 2s ease-in-out infinite}
+.loader-icon{width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:900;color:white;box-shadow:0 0 50px var(--c1-glow),0 20px 40px rgba(0,0,0,.4);animation:loaderIconFloat 3s ease-in-out infinite;position:relative}
+.loader-icon::before{content:'';position:absolute;inset:0;border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.25),transparent 60%)}
+@keyframes loaderGlowPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+@keyframes loaderIconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+.loader-text-wrap{text-align:center;animation:loaderFadeUp .8s var(--ease) .2s both}
+.loader-brand{font-size:28px;font-weight:900;background:linear-gradient(90deg,var(--c1),rgba(255,255,255,.95) 50%,var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.5px}
+.loader-tagline{font-size:13px;color:var(--muted);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:.5px;font-weight:500}
+
+.loader-progress-wrap{width:220px;animation:loaderFadeUp .8s var(--ease) .4s both}
+.loader-progress-track{width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.loader-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--c1),var(--c2));border-radius:3px;animation:loadBarFill 1.8s var(--ease) .3s forwards;position:relative}
+.loader-progress-bar::after{content:'';position:absolute;top:0;right:0;bottom:0;width:40px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6));animation:loaderShimmer 1s ease-in-out infinite}
+@keyframes loadBarFill{0%{width:0%}50%{width:65%}100%{width:100%}}
+@keyframes loaderShimmer{0%{opacity:0;transform:translateX(-20px)}50%{opacity:1}100%{opacity:0;transform:translateX(20px)}}
+.loader-pct{text-align:center;margin-top:10px;font-size:12px;font-weight:700;color:var(--c1);font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.3px}
+
+.loader-dots{display:flex;gap:6px;justify-content:center;animation:loaderFadeUp .8s var(--ease) .6s both}
+.loader-dot{width:5px;height:5px;border-radius:50%;background:var(--c1);opacity:.3;animation:dotBounce 1.4s ease-in-out infinite}
+.loader-dot:nth-child(2){animation-delay:.15s}
+.loader-dot:nth-child(3){animation-delay:.3s}
+@keyframes dotBounce{0%,80%,100%{opacity:.3;transform:scale(1)}40%{opacity:1;transform:scale(1.4)}}
+@keyframes loaderFadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ═══════════════════════════════════════════
+   PREMIUM BACKGROUND
+═══════════════════════════════════════════ */
+.bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora{position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 60% at -5% -10%,rgba(124,58,237,.18) 0%,transparent 55%),
+  radial-gradient(ellipse 50% 50% at 105% 105%,rgba(0,229,195,.14) 0%,transparent 50%),
+  radial-gradient(ellipse 40% 40% at 50% 50%,rgba(236,72,153,.06) 0%,transparent 60%),
+  var(--bg)}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform;pointer-events:none}
+.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(124,58,237,.22),transparent 70%);top:-300px;left:-200px;animation:orbDrift 18s ease-in-out infinite alternate}
+.orb2{width:600px;height:600px;background:radial-gradient(circle,rgba(0,229,195,.18),transparent 70%);bottom:-200px;right:-150px;animation:orbDrift 14s ease-in-out infinite alternate-reverse}
+.orb3{width:400px;height:400px;background:radial-gradient(circle,rgba(236,72,153,.12),transparent 70%);top:40%;left:50%;animation:orbDrift 10s ease-in-out infinite alternate}
+@keyframes orbDrift{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,-50px) scale(1.15)}}
+.noise-layer{position:absolute;inset:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:60px 60px;mask:radial-gradient(ellipse 80% 80% at 50% 40%,black 20%,transparent 70%)}
+#stars{position:absolute;inset:0}
+.star{position:absolute;background:white;border-radius:50%;animation:twinkle ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.05;transform:scale(1)}50%{opacity:.8;transform:scale(1.5)}}
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.app{position:relative;z-index:1;min-height:100vh}
+.page{display:none}
+.page.active{display:block;animation:pageReveal .4s var(--ease)}
+@keyframes pageReveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.wrap{max-width:700px;margin:0 auto;padding:76px 14px 116px}
+
+/* ═══════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════ */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:900;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:rgba(3,7,20,.78);backdrop-filter:blur(32px) saturate(180%);-webkit-backdrop-filter:blur(32px) saturate(180%);border-bottom:1px solid var(--border)}
+.topbar::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,229,195,.25),transparent)}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.logo-badge{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:white;flex-shrink:0;box-shadow:0 4px 16px rgba(0,229,195,.35);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.logo:hover .logo-badge{transform:scale(1.08) rotate(-4deg);box-shadow:0 6px 24px rgba(0,229,195,.5)}
+.logo-name{font-size:17px;font-weight:900;background:linear-gradient(90deg,var(--c1),rgba(255,255,255,.9) 55%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.3px}
+.top-right{display:flex;align-items:center;gap:7px}
+.icon-btn{width:38px;height:38px;border-radius:11px;background:var(--glass2);border:1px solid var(--border);color:white;font-size:17px;display:flex;align-items:center;justify-content:center;transition:all .25s var(--ease);position:relative;cursor:pointer;user-select:none}
+.icon-btn:hover{background:var(--glass3);border-color:var(--border2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.icon-btn:active{transform:scale(.92)}
+
+/* ═══════════════════════════════════════════
+   FLOATING BOTTOM NAV
+═══════════════════════════════════════════ */
+.bnav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:900;height:64px;display:flex;align-items:center;justify-content:space-around;background:rgba(6,9,31,.92);backdrop-filter:blur(32px) saturate(180%);-webkit-backdrop-filter:blur(32px);border:1px solid var(--border2);border-radius:32px;padding:0 6px;padding-bottom:env(safe-area-inset-bottom,0px);gap:2px;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.06);min-width:300px;max-width:380px;width:calc(100% - 32px)}
+.bnav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 14px;border-radius:22px;font-size:10px;font-weight:700;color:var(--muted);transition:all .3s var(--ease);cursor:pointer;user-select:none;min-width:54px;position:relative;font-family:'Inter',sans-serif;letter-spacing:.3px}
+.bnav-btn .ico{font-size:19px;transition:transform .3s var(--ease)}
+.bnav-btn.active{color:var(--c1);background:rgba(0,229,195,.1)}
+.bnav-btn.active::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:20px;height:2px;border-radius:2px;background:var(--c1);box-shadow:0 0 8px var(--c1)}
+.bnav-btn.active .ico{transform:scale(1.15);filter:drop-shadow(0 0 6px var(--c1))}
+.bnav-btn:not(.active):hover{color:rgba(255,255,255,.7);background:var(--glass)}
+.bnav-fab{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));border:none;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px var(--c1-glow);transition:all .3s var(--ease);cursor:pointer;flex-shrink:0}
+.bnav-fab:hover{transform:scale(1.08) translateY(-2px);box-shadow:0 8px 32px var(--c1-glow)}
+.bnav-fab:active{transform:scale(.92)}
+
+/* ═══════════════════════════════════════════
+   DROPDOWN MENU
+═══════════════════════════════════════════ */
+.dropdown{position:fixed;top:68px;right:12px;width:220px;background:rgba(6,9,31,.98);border:1px solid var(--border2);border-radius:18px;padding:8px;z-index:9998;backdrop-filter:blur(32px);animation:dropIn .25s var(--ease);display:none;flex-direction:column;gap:2px;box-shadow:var(--sh-lg)}
+.dropdown.open{display:flex}
+@keyframes dropIn{from{opacity:0;transform:translateY(-12px) scale(.94)}to{opacity:1;transform:none}}
+.dd-item{display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:11px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;transition:all .2s var(--ease)}
+.dd-item:hover{background:var(--glass3);color:white;padding-left:16px}
+.dd-sep{height:1px;background:var(--border);margin:4px 0}
+
+/* ═══════════════════════════════════════════
+   TOAST SYSTEM
+═══════════════════════════════════════════ */
+.toast-stack{position:fixed;top:74px;right:12px;z-index:99999;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:310px}
+.toast{padding:12px 16px;border-radius:14px;font-size:13px;font-weight:700;background:rgba(6,9,31,.97);border:1px solid var(--border2);backdrop-filter:blur(24px);box-shadow:var(--sh);animation:toastIn .35s var(--ease);pointer-events:auto;display:flex;align-items:center;gap:10px;min-width:230px;font-family:'Inter',sans-serif}
+.toast.ok{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.07)}
+.toast.err{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.07)}
+.toast.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.07)}
+.toast.info{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.07)}
+.toast-out{animation:toastOut .3s ease-in forwards}
+@keyframes toastIn{from{opacity:0;transform:translateX(24px) scale(.92)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateX(24px) scale(.92)}}
+
+/* ═══════════════════════════════════════════
+   REVEAL ANIMATIONS
+═══════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ═══════════════════════════════════════════
+   HERO SECTION
+═══════════════════════════════════════════ */
+.hero-section{text-align:center;padding:24px 0 20px;position:relative}
+.avatar-wrap{position:relative;width:100px;height:100px;margin:0 auto}
+.avatar-ring{position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(from 0deg,var(--c1),var(--c2),var(--c3),var(--c2),var(--c1));animation:spinRing 5s linear infinite;will-change:transform}
+.avatar-inner{position:absolute;inset:3px;border-radius:50%;background:var(--bg)}
+.avatar-glow{position:absolute;inset:-12px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,195,.2),transparent 70%);animation:glowPulse 3s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+.avatar-img{position:absolute;inset:6px;border-radius:50%;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:cover}
+@keyframes spinRing{to{transform:rotate(360deg)}}
+.store-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 16px;border-radius:40px;background:rgba(0,229,195,.07);border:1px solid rgba(0,229,195,.2);font-size:11px;font-weight:700;letter-spacing:.6px;margin-top:16px;text-transform:uppercase;font-family:'Inter',sans-serif}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;animation:livePulse 1.5s infinite;flex-shrink:0}
+@keyframes livePulse{0%,100%{transform:scale(1);box-shadow:0 0 8px #22c55e}50%{transform:scale(1.4);box-shadow:0 0 16px #22c55e}}
+.store-name{font-size:32px;font-weight:900;background:linear-gradient(135deg,var(--c1) 0%,rgba(255,255,255,.95) 50%,var(--c2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-top:12px;letter-spacing:-1px;line-height:1.1}
+.store-sub{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.7;font-family:'Inter',sans-serif}
+.hero-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:14px}
+.tag{padding:5px 13px;border-radius:30px;font-size:11px;font-weight:700;letter-spacing:.3px;font-family:'Inter',sans-serif;transition:all .25s var(--ease)}
+.tag-cyan{background:rgba(0,229,195,.08);border:1px solid rgba(0,229,195,.22);color:var(--c1)}
+.tag-purple{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.22);color:#a78bfa}
+.tag-pink{background:rgba(236,72,153,.08);border:1px solid rgba(236,72,153,.22);color:#f9a8d4}
+.tag:hover{transform:translateY(-2px) scale(1.04)}
+
+/* STATS */
+.stats-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.stat-item{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:14px 10px;text-align:center;transition:all .3s var(--ease);position:relative;overflow:hidden}
+.stat-item::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,195,.04),transparent);opacity:0;transition:opacity .3s}
+.stat-item:hover{border-color:rgba(0,229,195,.25);background:var(--glass2);transform:translateY(-2px)}
+.stat-item:hover::before{opacity:1}
+.stat-num{font-size:22px;font-weight:900;background:linear-gradient(135deg,var(--c1),#fff 70%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.stat-lbl{font-size:10px;color:var(--muted);margin-top:5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-family:'Inter',sans-serif}
+
+/* TICKER */
+.ticker{
+  margin-top:18px;overflow:hidden;padding:0;
+  border-radius:var(--r);
+  background:linear-gradient(135deg,rgba(0,229,195,.06),rgba(124,58,237,.05));
+  border:1px solid rgba(0,229,195,.18);
+  position:relative;
+  box-shadow:0 4px 24px rgba(0,229,195,.06),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+.ticker::before{left:0;background:linear-gradient(90deg,var(--bg) 30%,transparent)}
+.ticker::after{right:0;background:linear-gradient(-90deg,var(--bg) 30%,transparent)}
+.ticker-top{display:flex;align-items:center;gap:7px;padding:9px 16px 0;font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:rgba(0,229,195,.55);font-family:'Inter',sans-serif}
+.ticker-live-dot{width:5px;height:5px;border-radius:50%;background:var(--c1);box-shadow:0 0 6px var(--c1);animation:livePulse 1.5s infinite;flex-shrink:0}
+.ticker-track{overflow:hidden;padding:8px 0 12px}
+.ticker-inner{display:inline-flex;white-space:nowrap}
+.ticker-text{font-size:12px;font-weight:700;color:var(--c1);animation:tick 30s linear infinite;padding-right:60px;display:inline-block;font-family:'Inter',sans-serif;letter-spacing:.4px;text-shadow:0 0 18px rgba(0,229,195,.3)}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════════════════
+   MUSIC PLAYER PREMIUM 2026
+═══════════════════════════════════════════ */
+.player-premium{
+  position:relative;margin-top:14px;padding:18px 18px 14px;
+  border-radius:22px;overflow:hidden;
+  background:linear-gradient(135deg,rgba(0,229,195,.06),rgba(124,58,237,.06));
+  border:1px solid rgba(0,229,195,.18);
+  box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.03),inset 0 1px 0 rgba(255,255,255,.05);
+  transition:all .4s var(--ease);
+  will-change:transform;
+}
+.player-premium::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,229,195,.04) 0%,transparent 50%,rgba(124,58,237,.04) 100%);
+  pointer-events:none;
+}
+.player-premium::after{
+  content:'';position:absolute;top:0;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,195,.5),transparent);
+}
+.player-premium:hover{
+  border-color:rgba(0,229,195,.35);
+  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 40px rgba(0,229,195,.08);
+  transform:translateY(-2px);
+}
+
+/* Playing state glow */
+.player-premium.playing{
+  border-color:rgba(0,229,195,.4);
+  box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 60px rgba(0,229,195,.12),inset 0 0 60px rgba(0,229,195,.03);
+}
+
+/* Top row: now playing label */
+.player-now-playing{
+  display:flex;align-items:center;gap:6px;
+  font-size:9px;font-weight:800;letter-spacing:1.2px;
+  text-transform:uppercase;color:rgba(0,229,195,.6);
+  font-family:'Inter',sans-serif;margin-bottom:12px;
+}
+.player-np-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--c1);box-shadow:0 0 6px var(--c1);
+  animation:npDotPulse 1.5s ease-in-out infinite;flex-shrink:0;
+}
+.player-np-dot.off{animation:none;opacity:.3;box-shadow:none}
+@keyframes npDotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+/* Main row */
+.player-main-row{display:flex;align-items:center;gap:14px}
+
+/* Vinyl disc premium */
+.vinyl-wrap{position:relative;flex-shrink:0;width:56px;height:56px}
+.vinyl-outer-ring{
+  position:absolute;inset:-3px;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(0,229,195,.5),rgba(124,58,237,.5),rgba(0,229,195,.5));
+  opacity:0;transition:opacity .4s var(--ease);
+}
+.player-premium.playing .vinyl-outer-ring{opacity:1;animation:vinylRingRotate 3s linear infinite}
+@keyframes vinylRingRotate{to{transform:rotate(360deg)}}
+.vinyl{
+  width:56px;height:56px;border-radius:50%;
+  background:
+    radial-gradient(circle at center,#1a0a2e 0%,#0f0520 20%,#0a0316 30%,
+    rgba(0,229,195,.15) 32%,#080210 34%,
+    rgba(124,58,237,.1) 48%,#050110 50%,
+    rgba(0,229,195,.08) 64%,#030008 66%,
+    rgba(124,58,237,.06) 78%,#020006 80%,#010004 100%);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;position:relative;
+  box-shadow:0 4px 20px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05);
+  transition:box-shadow .4s var(--ease);
+}
+.player-premium.playing .vinyl{
+  box-shadow:0 4px 20px rgba(0,0,0,.6),0 0 24px rgba(0,229,195,.3);
+}
+.vinyl.spin-slow{animation:vinylSpin 4s linear infinite}
+.vinyl.spin-stop{animation:vinylSpinStop .8s var(--ease) forwards}
+@keyframes vinylSpin{to{transform:rotate(360deg)}}
+@keyframes vinylSpinStop{to{transform:rotate(var(--vinyl-stop-angle,360deg))}}
+
+.vinyl-label{
+  position:absolute;width:22px;height:22px;border-radius:50%;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  display:flex;align-items:center;justify-content:center;font-size:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,.5);z-index:2;
+}
+.vinyl-shine{
+  position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 50%);
+  pointer-events:none;z-index:3;
+}
+
+/* Player info */
+.player-info{flex:1;min-width:0}
+.player-track-name{font-size:14px;font-weight:800;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.player-track-sub{font-size:11px;color:var(--muted);margin-top:3px;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:5px}
+.player-track-artist{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Controls */
+.player-controls{display:flex;align-items:center;gap:8px;flex-shrink:0}
+
+.play-btn-premium{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  font-size:14px;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .3s var(--ease);
+  box-shadow:0 4px 16px rgba(0,229,195,.4);
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.play-btn-premium::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(135deg,rgba(255,255,255,.25),transparent 60%);
+}
+.play-btn-premium:hover{transform:scale(1.12);box-shadow:0 6px 24px rgba(0,229,195,.6)}
+.play-btn-premium:active{transform:scale(.9)}
+.player-premium.playing .play-btn-premium{
+  box-shadow:0 4px 16px rgba(0,229,195,.4),0 0 0 3px rgba(0,229,195,.2),0 0 0 7px rgba(0,229,195,.08);
+  animation:playBtnPulse 2s ease-in-out infinite;
+}
+@keyframes playBtnPulse{
+  0%,100%{box-shadow:0 4px 16px rgba(0,229,195,.4),0 0 0 3px rgba(0,229,195,.2),0 0 0 7px rgba(0,229,195,.08)}
+  50%{box-shadow:0 4px 16px rgba(0,229,195,.5),0 0 0 5px rgba(0,229,195,.15),0 0 0 12px rgba(0,229,195,.04)}
+}
+
+/* Progress bar */
+.player-progress-row{margin-top:13px;display:flex;align-items:center;gap:8px}
+.player-time{font-size:9px;font-weight:700;color:var(--dim);font-family:'Inter',monospace;min-width:28px;flex-shrink:0}
+.player-time.right{text-align:right}
+.player-progress-track{
+  flex:1;height:3px;background:rgba(255,255,255,.08);border-radius:3px;
+  cursor:pointer;position:relative;overflow:hidden;
+}
+.player-progress-fill{
+  height:100%;border-radius:3px;width:0%;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+  transition:width .5s linear;position:relative;
+}
+.player-progress-fill::after{
+  content:'';position:absolute;top:0;right:0;bottom:0;width:20px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.4));
+  animation:progShimmer 1.5s ease-in-out infinite;
+}
+@keyframes progShimmer{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+
+/* Visualizer bars */
+.player-viz{display:flex;align-items:flex-end;gap:2px;height:18px;flex-shrink:0}
+.viz-bar{
+  width:3px;border-radius:2px;
+  background:linear-gradient(to top,var(--c2),var(--c1));
+  transform-origin:bottom;
+  transition:height .1s ease;
+}
+.player-premium.playing .viz-bar:nth-child(1){animation:vizBar 0.8s ease-in-out infinite}
+.player-premium.playing .viz-bar:nth-child(2){animation:vizBar 0.6s ease-in-out infinite .1s}
+.player-premium.playing .viz-bar:nth-child(3){animation:vizBar 0.9s ease-in-out infinite .05s}
+.player-premium.playing .viz-bar:nth-child(4){animation:vizBar 0.7s ease-in-out infinite .15s}
+.player-premium.playing .viz-bar:nth-child(5){animation:vizBar 1.1s ease-in-out infinite .08s}
+@keyframes vizBar{
+  0%,100%{height:4px}
+  50%{height:16px}
+}
+.viz-bar{height:4px}
+
+/* Ripple */
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.25);animation:rippleOut .5s ease-out forwards;pointer-events:none;transform-origin:center}
+@keyframes rippleOut{from{transform:scale(0);opacity:.5}to{transform:scale(1);opacity:0}}
+
+/* Legacy (keep for backward compat) */
+.player{display:none}
+.disc{display:none}
+.play-btn{display:none}
+
+/* ═══════════════════════════════════════════
+   SECTION HEADERS
+═══════════════════════════════════════════ */
+.section{margin-top:28px}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.sec-title{font-size:17px;font-weight:800;display:flex;align-items:center;gap:10px;letter-spacing:-.3px}
+.sec-title-icon{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;box-shadow:0 4px 12px var(--c1-glow)}
+.sec-link{font-size:12px;font-weight:700;color:var(--c1);cursor:pointer;padding:4px 8px;border-radius:8px;transition:all .2s var(--ease);font-family:'Inter',sans-serif}
+.sec-link:hover{background:var(--c1-dim)}
+.section-hd{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:800;margin-bottom:16px;letter-spacing:-.2px}
+.section-hd-icon{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 4px 12px var(--c1-glow)}
+
+/* ═══════════════════════════════════════════
+   PRODUCT CARDS — PREMIUM ROMBAK TOTAL
+═══════════════════════════════════════════ */
+.products{display:flex;flex-direction:column;gap:16px}
+
+.product{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:24px;
+  overflow:hidden;
+  transition:all .4s var(--ease);
+  position:relative;
+  will-change:transform;
+}
+.product::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,229,195,.05),transparent 50%,rgba(124,58,237,.05));
+  opacity:0;transition:opacity .4s var(--ease);pointer-events:none;
+}
+.product::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,195,.4),transparent);
+  opacity:0;transition:opacity .4s var(--ease);
+}
+.product:hover{
+  border-color:rgba(0,229,195,.35);
+  background:rgba(255,255,255,.04);
+  transform:translateY(-4px);
+  box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px rgba(0,229,195,.2),0 0 60px rgba(0,229,195,.07);
+}
+.product:hover::before,.product:hover::after{opacity:1}
+
+/* Product top badge */
+.product-topbadge{
+  position:absolute;top:14px;right:14px;
+  padding:4px 12px;border-radius:20px;
+  font-size:10px;font-weight:800;z-index:2;letter-spacing:.4px;
+  font-family:'Inter',sans-serif;
+}
+.badge-hot{background:linear-gradient(135deg,rgba(239,68,68,.2),rgba(245,158,11,.2));border:1px solid rgba(239,68,68,.4);color:#fca5a5}
+.badge-best{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(234,179,8,.2));border:1px solid rgba(245,158,11,.4);color:#fde68a}
+.badge-fast{background:linear-gradient(135deg,rgba(0,229,195,.2),rgba(124,58,237,.2));border:1px solid rgba(0,229,195,.4);color:var(--c1)}
+.badge-popular{background:linear-gradient(135deg,rgba(236,72,153,.2),rgba(124,58,237,.2));border:1px solid rgba(236,72,153,.4);color:#f9a8d4}
+
+/* Product main area */
+.prod-main{display:flex;align-items:flex-start;gap:16px;padding:20px 20px 0}
+.prod-icon-box{
+  width:64px;height:64px;border-radius:18px;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;flex-shrink:0;
+  box-shadow:0 8px 24px var(--c1-glow);
+  transition:all .4s var(--ease);
+  position:relative;overflow:hidden;
+}
+.prod-icon-box::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2),transparent 60%)}
+.product:hover .prod-icon-box{transform:scale(1.08) rotate(-6deg);box-shadow:0 12px 32px var(--c1-glow)}
+.prod-body{flex:1;min-width:0;padding-right:80px}
+.prod-name{font-size:17px;font-weight:900;letter-spacing:-.3px;line-height:1.2}
+.prod-price-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:6px;padding:4px 12px;border-radius:20px;
+  background:rgba(0,229,195,.1);border:1px solid rgba(0,229,195,.25);
+  font-size:13px;font-weight:900;color:var(--c1);letter-spacing:-.2px;
+}
+.prod-price-icon{font-size:11px;opacity:.7}
+.prod-desc{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.65;font-family:'Inter',sans-serif}
+
+/* Product badges */
+.prod-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;padding:0 20px 14px}
+.badge{padding:4px 11px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.3px;font-family:'Inter',sans-serif}
+.b-cyan{background:rgba(0,229,195,.08);border:1px solid rgba(0,229,195,.22);color:var(--c1)}
+.b-green{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.22);color:#34d399}
+.b-purple{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.22);color:#a78bfa}
+
+/* Product divider */
+.prod-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:0 20px}
+
+/* Product detail expand */
+.prod-detail{max-height:0;overflow:hidden;transition:max-height .45s var(--ease),padding .4s var(--ease);padding:0 20px}
+.prod-detail.open{max-height:700px;overflow-y:auto;padding:16px 20px}
+.detail-inner{
+  padding:16px 18px;border-radius:16px;
+  background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.06);
+  font-size:12.5px;color:rgba(255,255,255,.7);line-height:2.2;
+  font-family:'Inter',sans-serif;
+}
+.detail-inner strong{
+  color:var(--c1);font-size:11px;font-weight:800;
+  display:block;margin-top:14px;margin-bottom:5px;
+  text-transform:uppercase;letter-spacing:.6px;
+}
+.detail-inner strong:first-child{margin-top:0}
+
+/* Product actions */
+.prod-actions{display:flex;gap:10px;padding:14px 20px 20px}
+
+/* ═══════════════════════════════════════════
+   BUTTON SYSTEM — PREMIUM
+═══════════════════════════════════════════ */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:12px 18px;border-radius:14px;font-size:13px;font-weight:700;
+  cursor:pointer;border:none;transition:all .25s var(--ease);
+  user-select:none;min-height:44px;letter-spacing:.2px;
+  position:relative;overflow:hidden;font-family:'Plus Jakarta Sans',sans-serif;
+}
+.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.07),transparent);opacity:0;transition:opacity .2s}
+.btn:hover::after{opacity:1}
+.btn-ghost{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--border2);flex:0 0 auto}
+.btn-ghost:hover{background:rgba(255,255,255,.09);border-color:var(--border3);transform:translateY(-1px)}
+.btn-buy{flex:1;background:linear-gradient(135deg,var(--c1),var(--c2));color:white;box-shadow:0 6px 22px rgba(0,229,195,.3);font-weight:800;font-size:13px}
+.btn-buy:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,229,195,.45),0 0 0 1px rgba(0,229,195,.3)}
+.btn-buy:active,.btn-ghost:active{transform:scale(.96)}
+.btn .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.3);transform:scale(0);animation:rippleAnim .5s ease-out;pointer-events:none}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+
+/* ═══════════════════════════════════════════
+   PAYMENT SECTION — PREMIUM FINTECH UI
+═══════════════════════════════════════════ */
+.pay-section-wrap{
+  display:flex;flex-direction:column;gap:12px;
+}
+/* Payment section premium */
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pay-method-card{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:20px;padding:16px 14px;text-align:center;
+  transition:all .35s var(--ease);position:relative;overflow:hidden;
+}
+.pay-method-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,195,.6),transparent);
+  opacity:0;transition:opacity .35s;
+}
+.pay-method-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(0,229,195,.05),transparent 60%);
+  opacity:0;transition:opacity .35s;pointer-events:none;
+}
+.pay-method-card:hover{
+  border-color:rgba(0,229,195,.3);
+  transform:translateY(-3px);
+  box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 32px rgba(0,229,195,.1);
+}
+.pay-method-card:hover::before,.pay-method-card:hover::after{opacity:1}
+.pm-header{display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:12px}
+.pm-icon{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 4px 12px var(--c1-glow);flex-shrink:0}
+.pm-label{font-size:13px;font-weight:800;color:var(--text);letter-spacing:.2px;font-family:'Inter',sans-serif}
+.dana-num-big{
+  font-size:15px;font-weight:900;color:var(--c1);
+  letter-spacing:.5px;margin-bottom:12px;line-height:1.3;
+  text-shadow:0 0 20px rgba(0,229,195,.4);
+  text-align:center;word-break:break-all;
+  padding:10px;border-radius:12px;
+  background:rgba(0,229,195,.04);border:1px solid rgba(0,229,195,.1);
+}
+.qris-img{
+  width:100%;max-width:130px;border-radius:12px;margin:0 auto 12px;
+  transition:transform .35s var(--ease);
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
+  border:2px solid rgba(255,255,255,.08);
+}
+.pay-method-card:hover .qris-img{transform:scale(1.04)}
+.copy-btn,.dl-btn{
+  width:100%;padding:10px 12px;border-radius:12px;
+  font-size:11px;font-weight:800;border:1px solid rgba(0,229,195,.2);
+  color:var(--c1);background:rgba(0,229,195,.06);
+  cursor:pointer;transition:all .3s var(--ease);
+  letter-spacing:.2px;font-family:'Inter',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  text-decoration:none;position:relative;overflow:hidden;
+}
+.copy-btn:hover,.dl-btn:hover{
+  background:rgba(0,229,195,.14);border-color:rgba(0,229,195,.4);
+  transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,229,195,.2);
+}
+.copy-btn:active,.dl-btn:active{transform:scale(.97)}
+.copy-btn.copied{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:#34d399}
+.secure-banner{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(16,185,129,.05),rgba(0,229,195,.04));
+  border:1px solid rgba(16,185,129,.15);
+  position:relative;overflow:hidden;
+}
+.secure-banner-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(0,229,195,.15));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;border:1px solid rgba(16,185,129,.2)}
+.secure-banner-text{font-size:12px;font-weight:700;color:rgba(255,255,255,.75);font-family:'Inter',sans-serif;line-height:1.5}
+.secure-banner-text span{color:#34d399;display:block;font-size:10px;font-weight:600;margin-top:2px;opacity:.85}
+
+/* Trust badges */
+.pay-trust-bar{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.pay-trust-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:9px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;font-family:'Inter',sans-serif;border:1px solid;transition:all .25s var(--ease)}
+.ptb-ssl{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2);color:#34d399}
+.ptb-verified{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.2);color:#60a5fa}
+.ptb-fast{background:rgba(0,229,195,.08);border-color:rgba(0,229,195,.2);color:var(--c1)}
+.ptb-secure{background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.2);color:#a78bfa}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════ */
+.testi-wrap{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,black 12%,black 88%,transparent)}
+.testi-track{display:flex;gap:12px;width:max-content;animation:scrollLeft 32s linear infinite}
+.testi-track:hover{animation-play-state:paused}
+@keyframes scrollLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.testi-card{width:240px;background:var(--glass);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;flex-shrink:0;transition:all .3s var(--ease)}
+.testi-card:hover{border-color:rgba(0,229,195,.2);background:var(--glass2);transform:translateY(-2px)}
+.testi-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.testi-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.testi-user{font-size:13px;font-weight:800;color:var(--c1)}
+.testi-text{font-size:12px;color:var(--muted);line-height:1.7;font-family:'Inter',sans-serif}
+.testi-stars{font-size:12px;margin-top:10px;color:var(--c4);letter-spacing:1px}
+
+/* ═══════════════════════════════════════════
+   COMMUNITY / ABOUT CARDS
+═══════════════════════════════════════════ */
+.about-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;margin-bottom:12px;transition:all .3s var(--ease)}
+.about-card:hover{border-color:var(--border2);background:var(--glass2)}
+.about-card h3{font-size:14px;font-weight:800;margin-bottom:12px}
+.about-text{font-size:13px;color:var(--muted);line-height:1.8;font-family:'Inter',sans-serif}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.check-list li{font-size:13px;color:var(--muted);padding-left:22px;position:relative;line-height:1.5;font-family:'Inter',sans-serif}
+.check-list li::before{content:'✓';position:absolute;left:0;color:var(--c1);font-weight:800}
+.contact-row{display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px;font-family:'Inter',sans-serif;transition:all .2s}
+.contact-row:last-child{border-bottom:none}
+.contact-row:hover{padding-left:4px}
+.contact-icon{font-size:18px;width:34px;text-align:center;flex-shrink:0}
+.contact-row a{color:var(--c1);font-weight:700}
+.btn-join{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:15px;border-radius:14px;background:linear-gradient(135deg,var(--c1),var(--c2));color:white;font-size:13px;font-weight:800;border:none;cursor:pointer;transition:all .3s var(--ease);margin-top:14px;text-decoration:none;box-shadow:0 6px 24px var(--c1-glow)}
+.btn-join:hover{transform:translateY(-2px);box-shadow:0 10px 36px var(--c1-glow)}
+.btn-join:active{transform:scale(.98)}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:15px;border-radius:14px;background:linear-gradient(135deg,#25d366,#128c7e);color:white;font-size:13px;font-weight:800;border:none;cursor:pointer;transition:all .3s var(--ease);text-decoration:none;margin-bottom:8px;box-shadow:0 6px 24px rgba(37,211,102,.25)}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(37,211,102,.4)}
+.btn-wa:active{transform:scale(.98)}
+.btn-new{width:100%;padding:13px;border-radius:14px;background:var(--glass3);border:1px solid var(--border2);color:white;font-size:13px;font-weight:700;cursor:pointer;transition:all .25s var(--ease);font-family:'Plus Jakarta Sans',sans-serif}
+.btn-new:hover{background:var(--glass3);border-color:var(--border3)}
+.btn-new:active{transform:scale(.98)}
+
+/* ═══════════════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════════════ */
+.dash-hero{background:linear-gradient(135deg,rgba(0,229,195,.06),rgba(124,58,237,.06));border:1px solid rgba(0,229,195,.1);border-radius:var(--r-xl);padding:22px;margin-bottom:18px;position:relative;overflow:hidden}
+.dash-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,195,.1),transparent 70%);pointer-events:none}
+.dash-hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.08),transparent 70%);pointer-events:none}
+.dash-user-row{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.dash-avatar{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;box-shadow:0 6px 20px var(--c1-glow)}
+.dash-user-info{flex:1;min-width:0}
+.dash-username{font-size:19px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px}
+.dash-member-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 11px;border-radius:20px;font-size:10px;font-weight:800;margin-top:5px;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif}
+.member-bronze{background:rgba(205,127,50,.12);border:1px solid rgba(205,127,50,.28);color:#cd7f32}
+.member-silver{background:rgba(192,192,192,.12);border:1px solid rgba(192,192,192,.28);color:#c0c0c0}
+.member-gold{background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.28);color:#ffd700}
+.member-platinum{background:rgba(0,229,195,.12);border:1px solid rgba(0,229,195,.28);color:var(--c1)}
+.member-diamond{background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.28);color:#a78bfa}
+.dash-edit-btn{padding:7px 15px;border-radius:10px;background:var(--glass2);border:1px solid var(--border2);font-size:11px;font-weight:700;color:white;transition:all .2s var(--ease);flex-shrink:0;font-family:'Inter',sans-serif}
+.dash-edit-btn:hover{background:var(--glass3);border-color:var(--border3);transform:translateY(-1px)}
+.dash-edit-btn:active{transform:scale(.95)}
+.wallet-strip{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;position:relative;z-index:1}
+.wallet-card{background:rgba(0,0,0,.25);border-radius:14px;padding:14px;border:1px solid var(--border)}
+.wallet-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif}
+.wallet-val{font-size:19px;font-weight:900;margin-top:5px;letter-spacing:-.3px}
+.wallet-val.green{color:var(--c1)}
+.wallet-val.purple{color:#a78bfa}
+.level-bar-wrap{margin-top:16px;position:relative;z-index:1}
+.level-bar-top{display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:7px;color:var(--muted);font-family:'Inter',sans-serif}
+.level-bar-track{height:6px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden}
+.level-bar-fill{height:100%;background:linear-gradient(90deg,var(--c1),var(--c2));border-radius:6px;transition:width 1s cubic-bezier(.4,0,.2,1);position:relative}
+.level-bar-fill::after{content:'';position:absolute;top:0;right:0;bottom:0;width:30px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4));animation:shimmer 2s ease-in-out infinite}
+@keyframes shimmer{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+.stat-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:16px;position:relative;overflow:hidden;transition:all .3s var(--ease)}
+.stat-card:hover{border-color:var(--border2);background:var(--glass2);transform:translateY(-2px)}
+.stat-card::before{content:'';position:absolute;bottom:-15px;right:-15px;width:70px;height:70px;border-radius:50%;opacity:.1}
+.stat-card.c1::before{background:var(--c1)}
+.stat-card.c2::before{background:var(--c2)}
+.stat-card.c3::before{background:var(--c3)}
+.stat-card.c4::before{background:var(--c4)}
+.stat-icon{font-size:22px;margin-bottom:10px}
+.stat-card-val{font-size:23px;font-weight:900;letter-spacing:-.5px}
+.stat-card-lbl{font-size:11px;color:var(--muted);margin-top:3px;font-weight:600;font-family:'Inter',sans-serif}
+.stat-card.c1 .stat-card-val{color:var(--c1)}
+.stat-card.c2 .stat-card-val{color:#a78bfa}
+.stat-card.c3 .stat-card-val{color:var(--c3)}
+.stat-card.c4 .stat-card-val{color:var(--c4)}
+
+/* ═══════════════════════════════════════════
+   ORDERS
+═══════════════════════════════════════════ */
+.orders-list{display:flex;flex-direction:column;gap:10px}
+.order-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px;cursor:pointer;transition:all .25s var(--ease);user-select:none}
+.order-card:hover{border-color:var(--border2);background:var(--glass2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.order-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.order-id{font-size:11px;font-weight:800;color:var(--muted);font-family:'Inter',monospace;letter-spacing:.5px}
+.order-status{padding:3px 11px;border-radius:20px;font-size:10px;font-weight:800;font-family:'Inter',sans-serif;letter-spacing:.3px}
+.s-pending{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:var(--c4)}
+.s-verified{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:#60a5fa}
+.s-process{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:#a78bfa}
+.s-done{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:#34d399}
+.s-cancel{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#f87171}
+.order-prod{font-size:15px;font-weight:800;letter-spacing:-.2px}
+.order-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.order-price{font-size:15px;font-weight:900;color:var(--c1)}
+.order-date{font-size:11px;color:var(--muted);font-family:'Inter',sans-serif}
+.search-bar{display:flex;gap:8px;margin-bottom:14px}
+.search-input{flex:1;padding:11px 16px;border-radius:12px;background:var(--glass);border:1px solid var(--border);color:white;font-size:13px;outline:none;transition:all .25s var(--ease);font-family:'Plus Jakarta Sans',sans-serif}
+.search-input:focus{border-color:var(--c1);background:var(--glass2);box-shadow:0 0 0 3px rgba(0,229,195,.1)}
+.search-input::placeholder{color:var(--dim)}
+.filter-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;-webkit-overflow-scrolling:touch}
+.filter-tabs::-webkit-scrollbar{display:none}
+.ftab{padding:7px 16px;border-radius:22px;font-size:11px;font-weight:700;color:var(--muted);background:var(--glass);border:1px solid var(--border);white-space:nowrap;cursor:pointer;transition:all .25s var(--ease);flex-shrink:0;letter-spacing:.3px;font-family:'Inter',sans-serif}
+.ftab.active{background:linear-gradient(135deg,rgba(0,229,195,.12),rgba(124,58,237,.12));border-color:rgba(0,229,195,.3);color:var(--c1)}
+.ftab:hover:not(.active){background:var(--glass2);color:rgba(255,255,255,.7)}
+.empty{text-align:center;padding:48px 20px}
+.empty-icon{font-size:52px;margin-bottom:14px;opacity:.4}
+.empty-text{font-size:15px;font-weight:700;color:var(--muted)}
+.empty-sub{font-size:12px;color:var(--dim);margin-top:7px;font-family:'Inter',sans-serif}
+
+/* ═══════════════════════════════════════════
+   MODAL SYSTEM
+═══════════════════════════════════════════ */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:800;align-items:flex-end;justify-content:center}
+.modal-bg.open{display:flex;animation:bgFadeIn .3s ease}
+@keyframes bgFadeIn{from{opacity:0}to{opacity:1}}
+.modal-sheet{width:100%;max-width:600px;background:var(--bg2);border:1px solid var(--border2);border-radius:26px 26px 0 0;max-height:92vh;overflow-y:auto;animation:sheetUp .35s var(--ease);-webkit-overflow-scrolling:touch}
+.modal-handle{width:38px;height:4px;background:var(--border2);border-radius:2px;margin:12px auto 0}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg2);z-index:1;backdrop-filter:blur(20px)}
+.modal-title{font-size:16px;font-weight:800;letter-spacing:-.2px}
+.modal-close{width:34px;height:34px;border-radius:50%;background:var(--glass2);border:1px solid var(--border);color:white;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s var(--ease);cursor:pointer}
+.modal-close:hover{background:var(--glass3);border-color:var(--border2)}
+.modal-close:active{transform:scale(.9)}
+.modal-body{padding:18px 20px 28px}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:none}}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;margin:18px 0}
+.tl-item{display:flex;gap:14px;position:relative}
+.tl-item:not(:last-child)::after{content:'';position:absolute;left:11px;top:26px;bottom:-4px;width:2px;background:var(--border2)}
+.tl-item.active::after,.tl-item.done::after{background:linear-gradient(var(--c1),var(--c2))}
+.tl-dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--border2);background:var(--bg);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;z-index:1;transition:all .3s var(--ease)}
+.tl-item.done .tl-dot{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;color:white}
+.tl-item.active .tl-dot{border-color:var(--c1);background:rgba(0,229,195,.1);color:var(--c1);animation:dotPulse 1.5s infinite}
+@keyframes dotPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,229,195,.35)}50%{box-shadow:0 0 0 7px rgba(0,229,195,0)}}
+.tl-content{padding-bottom:18px;flex:1}
+.tl-label{font-size:13px;font-weight:700}
+.tl-item.active .tl-label{color:var(--c1)}
+.tl-item.done .tl-label{color:var(--muted)}
+.tl-time{font-size:11px;color:var(--dim);margin-top:2px;font-family:'Inter',sans-serif}
+.detail-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border)}
+.detail-row:last-child{border-bottom:none}
+.dr-lbl{font-size:12px;color:var(--muted);font-weight:600;font-family:'Inter',sans-serif}
+.dr-val{font-size:13px;font-weight:700;text-align:right;max-width:60%}
+.dr-val.green{color:var(--c1)}
+.dr-val.mono{font-family:'Inter',monospace;font-size:12px;letter-spacing:.5px}
+
+/* ═══════════════════════════════════════════
+   ACHIEVEMENTS
+═══════════════════════════════════════════ */
+.achiev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.achiev-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center;transition:all .3s var(--ease);position:relative;overflow:hidden}
+.achiev-card.unlocked{border-color:rgba(0,229,195,.25);background:rgba(0,229,195,.04)}
+.achiev-card.unlocked:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,229,195,.15)}
+.achiev-card.locked{opacity:.4;filter:grayscale(.5)}
+.achiev-badge{position:absolute;top:6px;right:6px;width:16px;height:16px;border-radius:50%;background:var(--c1);display:flex;align-items:center;justify-content:center;font-size:9px;color:white;font-weight:800}
+.achiev-icon{font-size:26px;margin-bottom:7px}
+.achiev-name{font-size:10px;font-weight:800;line-height:1.3;font-family:'Inter',sans-serif;letter-spacing:.2px}
+
+/* ACTIVITY */
+.activity-list{display:flex;flex-direction:column;gap:6px}
+.activity-item{display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:var(--r-sm);background:var(--glass);border:1px solid var(--border);font-size:12px;transition:all .2s}
+.activity-item:hover{background:var(--glass2);border-color:var(--border2)}
+.activity-dot{width:8px;height:8px;border-radius:50%;background:var(--c1);flex-shrink:0;box-shadow:0 0 6px var(--c1)}
+.activity-text{flex:1;font-family:'Inter',sans-serif;color:var(--muted)}
+.activity-time{font-size:10px;color:var(--dim);flex-shrink:0;font-family:'Inter',sans-serif}
+
+/* ═══════════════════════════════════════════
+   CHAT BOT PREMIUM 2026
+═══════════════════════════════════════════ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:2000;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s var(--ease)}
+.modal-overlay.active{opacity:1;visibility:visible}
+.chat-sheet{
+  width:100%;max-width:540px;
+  background:rgba(6,9,31,.97);
+  border:1px solid rgba(0,229,195,.15);
+  border-radius:26px 26px 0 0;
+  max-height:72vh;min-height:400px;
+  display:flex;flex-direction:column;
+  transform:translateY(100%);
+  transition:transform .4s var(--ease);
+  box-shadow:0 -20px 60px rgba(0,0,0,.6),0 -1px 0 rgba(0,229,195,.1);
+  backdrop-filter:blur(40px);
+  overflow:hidden;
+}
+.modal-overlay.active .chat-sheet{transform:translateY(0)}
+
+.chat-handle{width:38px;height:4px;background:rgba(255,255,255,.12);border-radius:2px;margin:12px auto 0;flex-shrink:0}
+
+/* Premium header */
+.chat-header{
+  padding:12px 16px 11px;
+  display:flex;align-items:center;gap:11px;
+  border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;
+  background:rgba(0,229,195,.03);
+  position:relative;overflow:hidden;
+}
+.chat-header::after{
+  content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,229,195,.25),transparent);
+}
+.bot-av{
+  width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+  box-shadow:0 4px 14px var(--c1-glow);
+  position:relative;
+}
+.bot-av-pulse{
+  position:absolute;inset:-3px;border-radius:15px;
+  border:1.5px solid rgba(0,229,195,.35);
+  animation:botAvPulse 2.5s ease-in-out infinite;
+}
+@keyframes botAvPulse{
+  0%,100%{opacity:.5;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.04)}
+}
+
+.chat-hinfo{flex:1}
+.chat-hinfo h2{font-size:13px;font-weight:800;background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.chat-status-row{display:flex;align-items:center;gap:5px;margin-top:2px}
+.chat-online-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;flex-shrink:0;animation:onlineDotPulse 2s ease-in-out infinite}
+@keyframes onlineDotPulse{0%,100%{box-shadow:0 0 6px #22c55e}50%{box-shadow:0 0 12px #22c55e,0 0 20px rgba(34,197,94,.3)}}
+.chat-online-text{font-size:10px;color:#22c55e;font-weight:700;font-family:'Inter',sans-serif}
+
+/* Info strip */
+.chat-info-strip{
+  display:flex;align-items:center;gap:0;
+  background:rgba(0,229,195,.04);border-bottom:1px solid rgba(0,229,195,.08);
+  flex-shrink:0;
+}
+.chat-info-item{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:5px;
+  padding:7px 4px;font-size:9px;font-weight:800;color:rgba(255,255,255,.5);
+  font-family:'Inter',sans-serif;letter-spacing:.2px;
+  border-right:1px solid rgba(255,255,255,.05);
+}
+.chat-info-item:last-child{border-right:none}
+.chat-info-dot{width:5px;height:5px;border-radius:50%;background:var(--c1);flex-shrink:0}
+
+.chat-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.6);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s var(--ease);flex-shrink:0}
+.chat-close:hover{background:rgba(255,255,255,.1);color:white}
+.chat-close:active{transform:scale(.9)}
+
+/* Messages */
+.chat-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--bg);-webkit-overflow-scrolling:touch}
+.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-msgs::-webkit-scrollbar-thumb{background:rgba(0,229,195,.2);border-radius:4px}
+.msg-wrap{display:flex;flex-direction:column;max-width:80%}
+.msg-wrap.user{align-self:flex-end}
+.msg-wrap.bot{align-self:flex-start}
+.msg-quoted{font-size:11px;padding:5px 10px;border-radius:8px 8px 0 0;border-left:3px solid var(--c1);background:rgba(0,229,195,.07);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Inter',sans-serif}
+.msg-wrap.user .msg-quoted{border-left-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
+.msg{max-width:100%;padding:9px 13px;font-size:13px;line-height:1.55;animation:msgIn .25s var(--ease);word-wrap:break-word;font-family:'Inter',sans-serif}
+.msg-wrap.user .msg{background:linear-gradient(135deg,var(--c1),var(--c2));color:white;border-radius:16px 16px 4px 16px;box-shadow:0 4px 14px rgba(0,229,195,.25)}
+.msg-wrap.bot .msg{background:rgba(15,21,53,.9);border:1px solid rgba(255,255,255,.08);border-radius:16px 16px 16px 4px;color:rgba(255,255,255,.9)}
+.msg-time{font-size:10px;color:var(--dim);margin-top:3px;padding:0 2px;font-family:'Inter',sans-serif}
+.msg-wrap.user .msg-time{text-align:right}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Reply preview */
+.chat-reply-preview{display:none;align-items:center;gap:10px;padding:8px 14px;background:rgba(0,229,195,.04);border-top:1px solid rgba(0,229,195,.1)}
+.reply-bar{width:3px;height:36px;background:linear-gradient(var(--c1),var(--c2));border-radius:2px;flex-shrink:0}
+.reply-content{flex:1;min-width:0}
+.reply-label{font-size:10px;font-weight:700;color:var(--c1);display:block;font-family:'Inter',sans-serif}
+.reply-text{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;font-family:'Inter',sans-serif}
+.reply-cancel{width:22px;height:22px;border-radius:50%;background:var(--glass);border:1px solid var(--border);color:var(--muted);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s}
+.reply-cancel:hover{background:var(--glass2)}
+
+/* Input row */
+.chat-input-row{
+  padding:10px 12px 12px;
+  display:flex;gap:8px;
+  background:rgba(6,9,31,.98);
+  border-top:1px solid rgba(255,255,255,.05);flex-shrink:0;
+}
+.chat-input{
+  flex:1;padding:10px 14px;border-radius:12px;
+  background:rgba(15,21,53,.9);
+  border:1px solid rgba(255,255,255,.07);
+  color:white;font-size:14px;outline:none;
+  font-family:'Inter',sans-serif;transition:all .25s var(--ease);
+  -webkit-appearance:none;
+}
+.chat-input:focus{border-color:rgba(0,229,195,.4);box-shadow:0 0 0 3px rgba(0,229,195,.1),0 0 20px rgba(0,229,195,.05)}
+.chat-input::placeholder{color:rgba(255,255,255,.22)}
+.chat-send{
+  width:42px;height:42px;border-radius:12px;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  color:white;font-weight:800;font-size:16px;border:none;cursor:pointer;
+  transition:all .25s var(--ease);flex-shrink:0;
+  box-shadow:0 4px 14px rgba(0,229,195,.4);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.chat-send::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2),transparent 60%)}
+.chat-send:hover{transform:translateY(-1px) scale(1.05);box-shadow:0 6px 20px rgba(0,229,195,.5)}
+.chat-send:active{transform:scale(.9)}
+
+/* ═══════════════════════════════════════════
+   PAY MODAL — PREMIUM FINTECH
+═══════════════════════════════════════════ */
+.pay-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:3000;align-items:center;justify-content:center;padding:16px}
+.pay-overlay.active{display:flex}
+.pay-sheet{
+  width:100%;max-width:500px;
+  background:var(--bg2);
+  border:1px solid var(--border2);
+  border-radius:28px;
+  max-height:92vh;overflow-y:auto;
+  animation:modalPopIn .4s var(--ease);
+  -webkit-overflow-scrolling:touch;
+  box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04);
+}
+@keyframes modalPopIn{from{opacity:0;transform:scale(.92) translateY(24px)}to{opacity:1;transform:none}}
+.pay-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 22px;border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--bg2);z-index:1;
+  backdrop-filter:blur(24px);
+}
+.pay-title{font-size:17px;font-weight:900;letter-spacing:-.3px;display:flex;align-items:center;gap:8px}
+.pay-close{
+  width:34px;height:34px;border-radius:50%;background:var(--glass2);
+  border:1px solid var(--border);color:white;font-size:15px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s var(--ease);
+}
+.pay-close:hover{background:var(--glass3);border-color:var(--border2)}
+.pay-close:active{transform:scale(.9)}
+.pay-body{padding:20px 22px 24px}
+
+.steps{display:flex;align-items:center;gap:0;margin-bottom:24px}
+.step{display:flex;align-items:center;gap:8px;flex:1;position:relative}
+.step:not(:last-child)::after{content:'';flex:1;height:2px;background:var(--border);margin:0 6px;border-radius:2px;transition:all .4s var(--ease)}
+.step.done::after{background:linear-gradient(90deg,var(--c1),var(--c2))}
+.step-circle{width:32px;height:32px;border-radius:50%;background:var(--glass);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;transition:all .3s var(--ease);font-family:'Inter',sans-serif}
+.step.active .step-circle{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;color:white;box-shadow:0 4px 14px var(--c1-glow)}
+.step.done .step-circle{background:linear-gradient(135deg,var(--c1),var(--c2));border-color:transparent;color:white}
+.step-lbl{font-size:11px;font-weight:700;color:var(--muted);font-family:'Inter',sans-serif;letter-spacing:.3px}
+.step.active .step-lbl{color:var(--c1)}
+
+.form-group{margin-bottom:18px}
+.form-label{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px;display:block;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif}
+.form-input{width:100%;padding:13px 16px;border-radius:14px;background:var(--glass);border:1px solid var(--border);color:white;font-size:14px;outline:none;transition:all .25s var(--ease);font-family:'Plus Jakarta Sans',sans-serif}
+.form-input:focus{border-color:var(--c1);background:var(--glass2);box-shadow:0 0 0 3px rgba(0,229,195,.1)}
+.form-input::placeholder{color:var(--dim)}
+.form-input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+
+.nom-presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.nom-chip{
+  padding:8px 16px;border-radius:22px;font-size:12px;font-weight:800;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  color:var(--muted);cursor:pointer;transition:all .25s var(--ease);
+  font-family:'Inter',sans-serif;position:relative;overflow:hidden;
+  letter-spacing:.2px;
+}
+.nom-chip::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,229,195,.1),rgba(124,58,237,.1));
+  opacity:0;transition:opacity .25s;
+}
+.nom-chip:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.8);transform:translateY(-1px)}
+.nom-chip:active{transform:scale(.95)}
+.nom-chip.active{
+  background:linear-gradient(135deg,rgba(0,229,195,.15),rgba(124,58,237,.15));
+  border-color:rgba(0,229,195,.45);color:var(--c1);
+  box-shadow:0 4px 16px rgba(0,229,195,.2),0 0 0 1px rgba(0,229,195,.1);
+  transform:scale(1.04) translateY(-1px);
+}
+.nom-chip.active::before{opacity:1}
+
+/* QRIS in pay modal */
+.pay-qris-wrap{text-align:center;margin-bottom:20px;padding:20px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:20px}
+.qris-big{display:block;margin:0 auto;max-width:240px;border-radius:16px;width:100%;transition:transform .3s var(--ease);box-shadow:0 8px 28px rgba(0,0,0,.4)}
+.qris-big:hover{transform:scale(1.03)}
+.pay-dana-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:rgba(0,229,195,.06);border:1px solid rgba(0,229,195,.18);border-radius:14px;margin-top:14px}
+.pay-dana-label{font-size:11px;font-weight:700;color:var(--muted);font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:.5px}
+.pay-dana-number{font-size:20px;font-weight:900;color:var(--c1)}
+.pay-amount-big{font-size:30px;font-weight:900;color:var(--c1);letter-spacing:-.5px;text-align:center;margin:16px 0 4px;text-shadow:0 0 30px rgba(0,229,195,.4)}
+.pay-oid-row{text-align:center;font-size:12px;color:var(--muted);font-family:'Inter',sans-serif;margin-bottom:16px}
+.pay-oid-row span{font-family:monospace;color:var(--text);font-size:12px}
+
+.timer-box{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border-radius:13px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);font-size:13px;font-weight:700;color:var(--c4);font-family:'Inter',sans-serif}
+.timer{font-variant-numeric:tabular-nums;min-width:50px;text-align:center;font-size:16px}
+.upload-zone{border:2px dashed var(--border2);border-radius:16px;padding:30px;text-align:center;cursor:pointer;transition:all .3s var(--ease);position:relative;overflow:hidden;margin-top:16px}
+.upload-zone:hover,.upload-zone.has-file{border-color:var(--c1);background:rgba(0,229,195,.04)}
+.upload-icon{font-size:38px;margin-bottom:10px}
+.upload-text{font-size:14px;font-weight:700;color:var(--muted);font-family:'Inter',sans-serif}
+.upload-sub{font-size:11px;color:var(--dim);margin-top:5px;font-family:'Inter',sans-serif}
+.preview-wrap{display:none;margin-top:12px;position:relative}
+.preview-img{width:100%;border-radius:14px;max-height:220px;object-fit:cover}
+.remove-file{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.7);border:1px solid var(--border);color:white;font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.remove-file:hover{background:rgba(239,68,68,.5)}
+.btn-confirm{width:100%;padding:16px;border-radius:16px;background:linear-gradient(135deg,var(--c1),var(--c2));color:white;font-weight:900;font-size:14px;border:none;cursor:pointer;transition:all .25s var(--ease);margin-top:16px;box-shadow:0 8px 28px var(--c1-glow);font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.3px}
+.btn-confirm:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 12px 36px var(--c1-glow)}
+.btn-confirm:disabled{opacity:.35;cursor:not-allowed}
+.btn-confirm:not(:disabled):active{transform:scale(.98)}
+.btn-back{width:100%;padding:13px;border-radius:14px;background:transparent;border:1px solid var(--border2);color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;margin-top:10px;transition:all .25s var(--ease);font-family:'Plus Jakarta Sans',sans-serif}
+.btn-back:hover{border-color:var(--border3);color:rgba(255,255,255,.7)}
+.btn-back:active{transform:scale(.98)}
+.expired-box{display:none;padding:14px;border-radius:13px;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);text-align:center;font-size:13px;font-weight:700;color:#f87171;margin-top:12px;font-family:'Inter',sans-serif}
+.expired-box.show{display:block}
+
+.success{text-align:center;padding:10px 0 18px}
+.suc-anim{display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.suc-circle{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,rgba(16,185,129,.2),rgba(0,229,195,.2));border:2px solid rgba(16,185,129,.4);display:flex;align-items:center;justify-content:center;font-size:38px;animation:sucBounce .55s cubic-bezier(.32,1.5,.64,1)}
+@keyframes sucBounce{from{transform:scale(0) rotate(-30deg)}to{transform:scale(1) rotate(0)}}
+.suc-title{font-size:26px;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,var(--c1),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.suc-sub{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.7;font-family:'Inter',sans-serif}
+.suc-info{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:18px;margin:20px 0;text-align:left}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.info-row:last-child{border-bottom:none}
+.info-lbl{color:var(--muted);font-weight:600;font-family:'Inter',sans-serif}
+.info-val{font-weight:800}
+.info-val.green{color:var(--c1)}
+
+/* USER SETUP MODAL */
+.setup-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:9000;align-items:center;justify-content:center;padding:20px;display:none}
+.setup-modal.open{display:flex;animation:bgFadeIn .3s ease}
+.setup-card{width:100%;max-width:420px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r-xl);padding:30px;animation:modalPopIn .4s var(--ease);box-shadow:var(--sh-lg)}
+.setup-title{font-size:24px;font-weight:900;text-align:center;margin-bottom:7px;letter-spacing:-.5px}
+.setup-sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:26px;line-height:1.7;font-family:'Inter',sans-serif}
+.setup-avatar-row{display:flex;justify-content:center;gap:12px;margin-bottom:22px}
+.setup-av{width:58px;height:58px;border-radius:50%;background:var(--glass2);border:2px solid var(--border);font-size:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s var(--ease)}
+.setup-av:hover{transform:scale(1.08);border-color:var(--border2)}
+.setup-av.selected{border-color:var(--c1);background:rgba(0,229,195,.1);box-shadow:0 0 0 3px rgba(0,229,195,.2)}
+.setup-av:active{transform:scale(.9)}
+.setup-btn{width:100%;padding:15px;border-radius:14px;background:linear-gradient(135deg,var(--c1),var(--c2));color:white;font-size:14px;font-weight:900;border:none;cursor:pointer;transition:all .3s var(--ease);margin-top:12px;box-shadow:0 6px 24px var(--c1-glow);font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.2px}
+.setup-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px var(--c1-glow)}
+.setup-btn:active{transform:scale(.98)}
+
+/* ADMIN */
+.admin-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+.admin-order-item{background:var(--glass);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px;margin-bottom:10px;transition:all .25s}
+.admin-order-item:hover{border-color:var(--border2);background:var(--glass2)}
+.ao-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.ao-id{font-size:11px;font-weight:800;color:var(--muted);font-family:'Inter',monospace;letter-spacing:.5px}
+.ao-prod{font-size:14px;font-weight:800;letter-spacing:-.2px}
+.ao-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.ao-user{font-size:12px;color:var(--muted);font-family:'Inter',sans-serif}
+.ao-price{font-size:14px;font-weight:900;color:var(--c1)}
+.status-select{padding:5px 12px;border-radius:9px;background:var(--glass2);border:1px solid var(--border2);color:white;font-size:11px;font-weight:700;cursor:pointer;outline:none;font-family:'Inter',sans-serif;transition:all .2s}
+.status-select:focus{border-color:var(--c1)}
+.note-form{display:flex;gap:8px;margin-top:10px}
+.note-input{flex:1;padding:8px 12px;border-radius:9px;background:var(--glass);border:1px solid var(--border);color:white;font-size:12px;outline:none;font-family:'Inter',sans-serif}
+.note-input:focus{border-color:var(--c1)}
+.note-btn{padding:8px 14px;border-radius:9px;background:linear-gradient(135deg,var(--c1),var(--c2));color:white;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.note-btn:hover{transform:translateY(-1px)}
+.note-btn:active{transform:scale(.95)}
+
+/* ADMIN LOGIN */
+.admin-login-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(16px);z-index:9000;align-items:center;justify-content:center;padding:20px}
+.admin-login-modal.open{display:flex;animation:bgFadeIn .3s ease}
+.admin-login-card{width:100%;max-width:380px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r-xl);padding:28px;animation:modalPopIn .4s var(--ease);box-shadow:var(--sh-lg)}
+
+/* SPIN */
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.25);border-top-color:white;border-radius:50%;animation:spinAnim .55s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spinAnim{to{transform:rotate(360deg)}}
+
+/* CARD BASE */
+.card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:18px;transition:all .3s var(--ease)}
+.card:hover{border-color:var(--border2);background:var(--glass2)}
+.card-sm{padding:13px}
+
+/* FOOTER */
+footer{text-align:center;font-size:12px;color:var(--dim);padding:24px 0 10px;margin-top:20px;font-family:'Inter',sans-serif}
+footer span{color:var(--c1)}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(min-width:600px){
+  .modal-bg{align-items:center}
+  .modal-sheet{border-radius:var(--r-xl);max-height:82vh}
+  @keyframes sheetUp{from{opacity:0;transform:scale(.94) translateY(20px)}to{opacity:1;transform:none}}
+  .achiev-grid{grid-template-columns:repeat(4,1fr)}
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:420px){
+  .bnav-btn{padding:8px 10px;min-width:46px}
+  .store-name{font-size:26px}
+  .pay-methods{flex-direction:row;gap:10px}
+  .pay-method-card{padding:14px 10px}
+  .dana-num-big{font-size:14px}
+  .qris-img{max-width:130px}
+  .prod-body{padding-right:70px}
+  .pay-amount-big{font-size:24px}
+}
+@media(max-width:340px){
+  .pay-methods{flex-direction:row;gap:8px}
+  .prod-name{font-size:15px}
+  .dana-num-big{font-size:12px}
+}
+
+/* ═══════════════════════════════════════════
+   JASA SHARE — PRODUK BARU (BEST SELLER)
+═══════════════════════════════════════════ */
+.product-share-new{
+  border-color:rgba(245,158,11,.18);
+  background:rgba(245,158,11,.02);
+  position:relative;
+}
+.product-share-new::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(245,158,11,.06),transparent 50%,rgba(234,179,8,.04));
+  opacity:1;pointer-events:none;border-radius:inherit;
+}
+.product-share-new::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,158,11,.5),transparent);
+  opacity:1;
+}
+.product-share-new:hover{
+  border-color:rgba(245,158,11,.45) !important;
+  box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px rgba(245,158,11,.25),0 0 60px rgba(245,158,11,.1) !important;
+}
+.product-share-new .product-topbadge{
+  animation:shareBadgePulse 2.5s ease-in-out infinite;
+}
+@keyframes shareBadgePulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.0)}
+  50%{box-shadow:0 0 12px 2px rgba(245,158,11,.25)}
+}
+.prod-icon-share{
+  background:linear-gradient(135deg,#f59e0b,#f97316) !important;
+  box-shadow:0 8px 24px rgba(245,158,11,.35) !important;
+}
+.product-share-new:hover .prod-icon-share{
+  box-shadow:0 12px 32px rgba(245,158,11,.5) !important;
+}
+.product-share-new .prod-price-tag{
+  background:rgba(245,158,11,.1);
+  border-color:rgba(245,158,11,.3);
+  color:#fbbf24;
+}
+.btn-share-order{
+  background:linear-gradient(135deg,#f59e0b,#f97316) !important;
+  box-shadow:0 6px 22px rgba(245,158,11,.35) !important;
+}
+.btn-share-order:hover{
+  transform:translateY(-2px) !important;
+  box-shadow:0 10px 32px rgba(245,158,11,.5),0 0 0 1px rgba(245,158,11,.35) !important;
+}
+
+/* ═══════════════════════════════════════════
+   PERFORMANCE OPTIMIZATIONS
+═══════════════════════════════════════════ */
+/* Use transform-based animations only (no reflow/repaint triggers) */
+.product,.order-card,.pay-method-card,.ss-card,.stat-card,.achiev-card{
+  will-change:auto;
+  transform:translateZ(0);
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+/* Reduce expensive box-shadow on scroll — activate only on hover */
+.product{box-shadow:none}
+.product:hover{box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 0 1px rgba(0,229,195,.18),0 0 40px rgba(0,229,195,.06)}
+/* Optimize orb animations for GPU */
+.orb{transform:translate3d(0,0,0)}
+/* Smooth scrolling with momentum on all scrollable containers */
+.prod-detail.open,.modal-sheet,.filter-tabs,.testi-track{
+  -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth;
+}
+/* Reduce paint area for non-visible elements */
+.page:not(.active){
+  content-visibility:auto;
+  contain-intrinsic-size:0 600px;
+}
+/* Optimize ticker animation */
+.ticker-inner{will-change:transform}
+/* Reduce shimmer repaints */
+.loader-progress-bar::after,.level-bar-fill::after{will-change:opacity,transform}
+
+/* ═══════════════════════════════════════════
+   ORDERS PAGE — PREMIUM REDESIGN
+═══════════════════════════════════════════ */
+.order-card{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:20px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:all .3s var(--ease);
+  position:relative;
+}
+.order-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--c1),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.order-card:hover{
+  border-color:rgba(0,229,195,.2);
+  background:rgba(0,229,195,.03);
+  transform:translateY(-2px);
+  box-shadow:0 10px 40px rgba(0,0,0,.5),0 0 20px rgba(0,229,195,.06);
+}
+.order-card:hover::before{opacity:1}
+.order-card-inner{padding:16px 18px}
+.order-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.order-id{font-size:10px;font-weight:800;color:var(--muted);font-family:'Inter',monospace;letter-spacing:.8px;background:rgba(255,255,255,.04);padding:3px 9px;border-radius:6px;border:1px solid var(--border)}
+.order-status{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:800;font-family:'Inter',sans-serif;letter-spacing:.3px;flex-shrink:0}
+.order-main{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.order-prod-icon{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 14px rgba(0,229,195,.25)}
+.order-prod{font-size:15px;font-weight:800;letter-spacing:-.2px;flex:1}
+.order-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 18px;
+  background:rgba(0,0,0,.25);
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.order-price{font-size:16px;font-weight:900;color:var(--c1);letter-spacing:-.3px}
+.order-date{font-size:11px;color:var(--dim);font-family:'Inter',sans-serif}
+.order-arrow{font-size:13px;color:var(--muted)}
+
+/* ORDERS PAGE HEADER */
+.orders-page-hero{
+  background:linear-gradient(135deg,rgba(0,229,195,.06),rgba(124,58,237,.06));
+  border:1px solid rgba(0,229,195,.1);
+  border-radius:var(--r-xl);padding:20px 22px;
+  margin-bottom:20px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;overflow:hidden;
+}
+.orders-page-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,195,.1),transparent 70%);pointer-events:none}
+.orders-hero-left{display:flex;align-items:center;gap:14px}
+.orders-hero-icon{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 20px rgba(0,229,195,.3)}
+.orders-hero-title{font-size:20px;font-weight:900;letter-spacing:-.4px}
+.orders-hero-sub{font-size:12px;color:var(--muted);font-family:'Inter',sans-serif;margin-top:2px}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════ LOADING SCREEN ═══════════ -->
+<div id="loader">
+  <div class="loader-bg-rings">
+    <div class="loader-ring"></div>
+    <div class="loader-ring"></div>
+    <div class="loader-ring"></div>
+  </div>
+  <div class="loader-center">
+    <div class="loader-icon-wrap">
+      <div class="loader-icon-glow"></div>
+      <div class="loader-icon">L</div>
+    </div>
+    <div class="loader-text-wrap">
+      <div class="loader-brand">LCBBBZ Store</div>
+      <div class="loader-tagline">Premium Digital Platform</div>
+    </div>
+    <div class="loader-progress-wrap">
+      <div class="loader-progress-track">
+        <div class="loader-progress-bar" id="loaderBar"></div>
+      </div>
+      <div class="loader-pct" id="loaderPct">0%</div>
+    </div>
+    <div class="loader-dots">
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- BACKGROUND -->
+<div class="bg-wrap">
+  <div class="aurora"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="noise-layer"></div>
+  <div class="grid-bg"></div>
+  <div id="stars"></div>
+</div>
+
+<div class="app">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo" onclick="goPage('home')">
+    <div class="logo-badge">L</div>
+    <div class="logo-name">LCBBBZ Store</div>
+  </div>
+  <div class="top-right">
+    <div class="icon-btn" onclick="goPage('dashboard')" title="Dashboard">👤</div>
+    <div class="icon-btn" id="notifBtn" onclick="toggleDropdown()" title="Menu" style="font-size:19px;letter-spacing:1px">⋯</div>
+  </div>
+</div>
+
+<!-- DROPDOWN -->
+<div class="dropdown" id="dropdown">
+  <div class="dd-item" onclick="goPage('home');closeDropdown()">🏠 Beranda</div>
+  <div class="dd-item" onclick="goPage('dashboard');closeDropdown()">📊 Dashboard</div>
+  <div class="dd-item" onclick="goPage('orders');closeDropdown()">📦 Pesanan Saya</div>
+  <div class="dd-item" onclick="goPage('profile');closeDropdown()">🏪 Profil Toko</div>
+  <div class="dd-sep"></div>
+  <div class="dd-item" onclick="showAdmin();closeDropdown()">🔐 Admin Panel</div>
+  <div class="dd-item" onclick="goPage('home');scrollTo_('#produk');closeDropdown()">🛒 Produk</div>
+  <div class="dd-item" onclick="openChat();closeDropdown()">💬 Chat Admin</div>
+</div>
+
+<!-- TOAST STACK -->
+<div class="toast-stack" id="toastStack"></div>
+
+<!-- ════════ HOME PAGE ════════ -->
+<div class="page active" id="page-home">
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero-section reveal">
+    <div class="avatar-wrap">
+      <div class="avatar-glow"></div>
+      <div class="avatar-ring"></div>
+      <div class="avatar-inner"></div>
+      <img class="avatar-img" src="LcbbbZ.jpg" alt="LcbbbZstore" onerror="this.style.display='none'">
+    </div>
+    <div class="store-pill"><div class="live-dot"></div> Store Aktif 24 Jam</div>
+    <div class="store-name">LcbbbZstore</div>
+    <div class="store-sub">Platform Digital Premium Terpercaya 🚀<br>Suntik Sosmed • Nokos • Tebar • Top Up Game</div>
+    <div class="hero-tags">
+      <span class="tag tag-cyan">⚡ Fast Process</span>
+      <span class="tag tag-purple">🔐 100% Trusted</span>
+      <span class="tag tag-pink">💯 Garansi Refill</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip reveal reveal-delay-1">
+    <div class="stat-item">
+      <div class="stat-num" data-count="1000" data-suffix="K+">0</div>
+      <div class="stat-lbl">Customer</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24/7</div>
+      <div class="stat-lbl">Online</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-count="100" data-suffix="%">0</div>
+      <div class="stat-lbl">Trusted</div>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker reveal reveal-delay-2">
+    <div class="ticker-top"><div class="ticker-live-dot"></div> Live Updates</div>
+    <div class="ticker-track">
+      <div class="ticker-inner">
+        <span class="ticker-text">🔥 PROMO AKTIF &nbsp;◆&nbsp; Suntik Sosmed Mulai 5K &nbsp;◆&nbsp; ⚡ Nokos Premium 4K &nbsp;◆&nbsp; 🎮 Top Up Game Termurah &nbsp;◆&nbsp; 📢 Jasa Tebar 40+ Respon/1K &nbsp;◆&nbsp; ✅ Fast Respon 24/7 &nbsp;◆&nbsp; 💬 Chat Admin Sekarang &nbsp;◆&nbsp; 🛡️ 100% Trusted &nbsp;◆&nbsp; 🚀 Proses 5 Menit &nbsp;◆&nbsp;</span>
+        <span class="ticker-text">🔥 PROMO AKTIF &nbsp;◆&nbsp; Suntik Sosmed Mulai 5K &nbsp;◆&nbsp; ⚡ Nokos Premium 4K &nbsp;◆&nbsp; 🎮 Top Up Game Termurah &nbsp;◆&nbsp; 📢 Jasa Tebar 40+ Respon/1K &nbsp;◆&nbsp; ✅ Fast Respon 24/7 &nbsp;◆&nbsp; 💬 Chat Admin Sekarang &nbsp;◆&nbsp; 🛡️ 100% Trusted &nbsp;◆&nbsp; 🚀 Proses 5 Menit &nbsp;◆&nbsp;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAYER PREMIUM -->
+  <div class="player-premium reveal reveal-delay-3" id="playerPremium">
+    <div class="player-now-playing">
+      <div class="player-np-dot off" id="npDot"></div>
+      <span id="npLabel">Ready to Play</span>
+    </div>
+    <div class="player-main-row">
+      <!-- Vinyl Disc -->
+      <div class="vinyl-wrap">
+        <div class="vinyl-outer-ring"></div>
+        <div class="vinyl" id="vinylDisc">
+          <div class="vinyl-label">🎵</div>
+          <div class="vinyl-shine"></div>
+        </div>
+      </div>
+      <!-- Info -->
+      <div class="player-info">
+        <div class="player-track-name">Playlist LcbbbZstore</div>
+        <div class="player-track-sub">
+          <span class="player-track-artist">Nikmati musik sambil belanja 🎶</span>
+        </div>
+      </div>
+      <!-- Controls -->
+      <div class="player-controls">
+        <!-- Visualizer -->
+        <div class="player-viz" id="playerViz">
+          <div class="viz-bar"></div>
+          <div class="viz-bar"></div>
+          <div class="viz-bar"></div>
+          <div class="viz-bar"></div>
+          <div class="viz-bar"></div>
+        </div>
+        <!-- Play button -->
+        <button class="play-btn-premium" id="playBtnPrem" onclick="toggleMusic()">▶</button>
+      </div>
+    </div>
+    <!-- Progress bar -->
+    <div class="player-progress-row">
+      <span class="player-time" id="pTimeLeft">0:00</span>
+      <div class="player-progress-track" id="pTrack" onclick="seekMusic(event)">
+        <div class="player-progress-fill" id="pFill"></div>
+      </div>
+      <span class="player-time right" id="pTimeDur">—</span>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="section reveal" id="produk">
+    <div class="sec-hd">
+      <div class="sec-title"><div class="sec-title-icon">🛒</div> Produk Premium</div>
+    </div>
+    <div class="products">
+
+      <!-- PRODUK 0: JASA SHARE — BEST SELLER (BARU) -->
+      <div class="product product-share-new">
+        <div class="product-topbadge badge-best">🔥 BEST SELLER</div>
+        <div class="prod-main">
+          <div class="prod-icon-box prod-icon-share">📢</div>
+          <div class="prod-body">
+            <div class="prod-name">Jasa Share</div>
+            <div class="prod-price-tag"><span class="prod-price-icon">💰</span> Mulai 600P</div>
+            <div class="prod-desc">Jasa Share paling laris untuk kebutuhan promosi grup, channel, komunitas, marketplace, bisnis, maupun publikasi lainnya dengan proses cepat, aman, dan terpercaya.</div>
+          </div>
+        </div>
+        <div class="prod-badges">
+          <span class="badge b-cyan">⚡ Fast Process</span>
+          <span class="badge b-green">✅ Trusted</span>
+          <span class="badge b-purple">🕒 24 Jam</span>
+        </div>
+        <div class="prod-divider"></div>
+        <div class="prod-detail" id="d0">
+          <div class="detail-inner">
+            <strong>📋 PRICE LIST JASA SHARE BY LCBBB</strong>
+            📢 1 JAM &nbsp;=&nbsp; 600P (BERKELIPATAN)<br>
+            📢 1 HARI &nbsp;=&nbsp; 8K (BERKELIPATAN)<br>
+            📢 1 MINGGU &nbsp;=&nbsp; 50K (BERKELIPATAN)<br>
+            <strong>🔥 Keunggulan</strong>
+            ⚡ Fast Process<br>
+            🔥 Produk Terlaris<br>
+            ✅ Trusted Service<br>
+            🕒 Support 24 Jam<br>
+            📈 Cocok Untuk Promosi<br>
+            🚀 Proses Cepat<br>
+            <strong>📌 Info</strong>
+            Hubungi admin untuk paket custom dan info lebih lanjut!
+          </div>
+        </div>
+        <div class="prod-actions">
+          <button class="btn btn-ghost" onclick="toggleDetail('d0',this)">📄 Detail Produk</button>
+          <button class="btn btn-buy btn-share-order" onclick="orderJasaShare()">📢 Order Sekarang</button>
+        </div>
+      </div>
+
+      <!-- PRODUK 1: SUNTIK SOSMED -->
+      <div class="product">
+        <div class="product-topbadge badge-hot">🔥 HOT ITEM</div>
+        <div class="prod-main">
+          <div class="prod-icon-box">💉</div>
+          <div class="prod-body">
+            <div class="prod-name">Suntik Sosmed</div>
+            <div class="prod-price-tag"><span class="prod-price-icon">💰</span> Mulai 5K</div>
+            <div class="prod-desc">Followers, likes, views & subscribers proses cepat untuk semua platform sosial media ⚡</div>
+          </div>
+        </div>
+        <div class="prod-badges">
+          <span class="badge b-cyan">⚡ Fast Process</span>
+          <span class="badge b-green">✓ Real Users</span>
+          <span class="badge b-purple">🔄 Garansi Refill</span>
+        </div>
+        <div class="prod-divider"></div>
+        <div class="prod-detail" id="d1">
+          <div class="detail-inner">
+            <strong>📋 Paket Harga</strong>
+            • Mursun (Murid Suntik): 5K<br>
+            • Custom paket tersedia<br>
+            <strong>✅ Platform Support</strong>
+            TikTok &nbsp;•&nbsp; Instagram &nbsp;•&nbsp; YouTube &nbsp;•&nbsp; Facebook<br>
+            <strong>🔥 Keunggulan</strong>
+            ✓ Proses sangat cepat<br>
+            ✓ Aman digunakan<br>
+            ✓ Garansi refill jika drop<br>
+            ✓ Admin fast respon<br>
+            <strong>⚡ Catatan</strong>
+            Harga bisa negotiable. Hubungi admin untuk paket custom!
+          </div>
+        </div>
+        <div class="prod-actions">
+          <button class="btn btn-ghost" onclick="toggleDetail('d1',this)">📄 Detail</button>
+          <button class="btn btn-buy" onclick="openPayModal('Suntik Sosmed')">🛍️ Order & Bayar</button>
+        </div>
+      </div>
+
+      <!-- PRODUK 2: NOKOS PREMIUM -->
+      <div class="product">
+        <div class="product-topbadge badge-best">⭐ BEST SELLER</div>
+        <div class="prod-main">
+          <div class="prod-icon-box">📲</div>
+          <div class="prod-body">
+            <div class="prod-name">Nokos Premium</div>
+            <div class="prod-price-tag"><span class="prod-price-icon">💰</span> 4K – 5K</div>
+            <div class="prod-desc">Nomor virtual WA, Telegram, dan platform lainnya. Proses kilat, aman, bisa dijual kembali 🔥</div>
+          </div>
+        </div>
+        <div class="prod-badges">
+          <span class="badge b-cyan">🌍 Multi Negara</span>
+          <span class="badge b-green">⚡ 5 Menit</span>
+          <span class="badge b-purple">💰 Bisa Dijual</span>
+        </div>
+        <div class="prod-divider"></div>
+        <div class="prod-detail" id="d2">
+          <div class="detail-inner">
+            <strong>📋 Paket Harga</strong>
+            • Nokos Indo Fresh: 4K<br>
+            • Nokos Indo Save: 5K<br>
+            • Murkos (Murid Nokos): 5K<br>
+            <strong>✅ Keunggulan</strong>
+            ✓ Ready banyak negara<br>
+            ✓ Fast kirim nomor<br>
+            ✓ Aman untuk verifikasi<br>
+            ✓ Bisa dijual kembali<br>
+            <strong>📌 Info Penting</strong>
+            Pengiriman maksimal 5 menit setelah pembayaran!
+          </div>
+        </div>
+        <div class="prod-actions">
+          <button class="btn btn-ghost" onclick="toggleDetail('d2',this)">📄 Detail</button>
+          <button class="btn btn-buy" onclick="openPayModal('Nokos Premium')">🛍️ Order & Bayar</button>
+        </div>
+      </div>
+
+      <!-- PRODUK 3: JASA TEBAR -->
+      <div class="product">
+        <div class="product-topbadge badge-fast">⚡ FAST PROCESS</div>
+        <div class="prod-main">
+          <div class="prod-icon-box">🚀</div>
+          <div class="prod-body">
+            <div class="prod-name">Jasa Tebar</div>
+            <div class="prod-price-tag"><span class="prod-price-icon">💰</span> 1K – 10K+</div>
+            <div class="prod-desc">Jasa broadcast murah, cepat dan terpercaya. 40+ respon per 1K, bisa custom target 😎</div>
+          </div>
+        </div>
+        <div class="prod-badges">
+          <span class="badge b-cyan">📢 Broadcast</span>
+          <span class="badge b-green">🎯 Custom Target</span>
+          <span class="badge b-purple">💬 40+ Respon/1K</span>
+        </div>
+        <div class="prod-divider"></div>
+        <div class="prod-detail" id="d3">
+          <div class="detail-inner">
+            <strong>📋 Paket & Respon</strong>
+            • 1K = 40+ Respon<br>
+            • 2K = 60+ Respon<br>
+            • 3K = 80+ Respon<br>
+            • 4K = 100+ Respon<br>
+            • 5K = 120+ Respon<br>
+            • 10K = 240+ Respon<br>
+            <strong>✅ Keunggulan</strong>
+            ✓ Proses cepat<br>
+            ✓ Aman dan trusted<br>
+            ✓ Bisa request target<br>
+            ✓ Admin fast respon
+          </div>
+        </div>
+        <div class="prod-actions">
+          <button class="btn btn-ghost" onclick="toggleDetail('d3',this)">📄 Detail</button>
+          <button class="btn btn-buy" onclick="openPayModal('Jasa Tebar')">🛍️ Order & Bayar</button>
+        </div>
+      </div>
+
+      <!-- PRODUK 4: TOP UP GAME -->
+      <div class="product">
+        <div class="product-topbadge badge-popular">🎮 POPULAR</div>
+        <div class="prod-main">
+          <div class="prod-icon-box">🎮</div>
+          <div class="prod-body">
+            <div class="prod-name">Top Up All Game</div>
+            <div class="prod-price-tag"><span class="prod-price-icon">💰</span> Mulai 2K</div>
+            <div class="prod-desc">Top up semua game paling murah, cepat masuk & aman. FF, ML, PUBG, COD dan masih banyak lagi 🔥</div>
+          </div>
+        </div>
+        <div class="prod-badges">
+          <span class="badge b-cyan">🎮 Multi Game</span>
+          <span class="badge b-green">⚡ Otomatis</span>
+          <span class="badge b-purple">🏷️ Harga Murah</span>
+        </div>
+        <div class="prod-divider"></div>
+        <div class="prod-detail" id="d4">
+          <div class="detail-inner">
+            <strong>💎 Free Fire</strong>
+            • 5 DM: 1K &nbsp;•&nbsp; 70 DM: 10K &nbsp;•&nbsp; 140 DM: 19K<br>
+            <strong>⚔️ Mobile Legends</strong>
+            • 86 DM: 23K &nbsp;•&nbsp; 172 DM: 46K &nbsp;•&nbsp; 257 DM: 65K<br>
+            <strong>🔫 PUBG Mobile</strong>
+            • 70 UC: 31K &nbsp;•&nbsp; 210 UC: 60K &nbsp;•&nbsp; 350 UC: 94K<br>
+            <strong>💰 PB CASH Zepetto</strong>
+            • 1200: 10K &nbsp;•&nbsp; 2400: 19K &nbsp;•&nbsp; 6000: 47K<br>
+            <strong>🎯 Call of Duty</strong>
+            • 26 CP: 6K &nbsp;•&nbsp; 53 CP: 12K &nbsp;•&nbsp; 106 CP: 21K<br>
+            <strong>⚡ Proses</strong>
+            Masuk otomatis 5–30 menit setelah pembayaran!
+          </div>
+        </div>
+        <div class="prod-actions">
+          <button class="btn btn-ghost" onclick="toggleDetail('d4',this)">📄 Detail</button>
+          <button class="btn btn-buy" onclick="openPayModal('Top Up Game')">🛍️ Order & Bayar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PAYMENT SECTION -->
+  <div class="section reveal" id="payment">
+    <div class="sec-hd">
+      <div class="sec-title"><div class="sec-title-icon">💳</div> Metode Pembayaran</div>
+    </div>
+    <div class="pay-section-wrap">
+
+      <!-- Trust badges -->
+      <div class="pay-trust-bar">
+        <div class="pay-trust-badge ptb-ssl">🔒 SSL Secure</div>
+        <div class="pay-trust-badge ptb-verified">✅ Verified</div>
+        <div class="pay-trust-badge ptb-fast">⚡ Fast Payment</div>
+        <div class="pay-trust-badge ptb-secure">🛡 Safe</div>
+      </div>
+
+      <div class="pay-methods">
+
+        <!-- DANA -->
+        <div class="pay-method-card">
+          <div class="pm-header">
+            <div class="pm-icon">💙</div>
+            <div class="pm-label">DANA</div>
+          </div>
+          <div class="dana-num-big" id="danaNum">085773286241</div>
+          <button class="copy-btn" id="copyBtn" onclick="copyDana()">
+            <span>📋</span> Salin Nomor
+          </button>
+        </div>
+
+        <!-- QRIS -->
+        <div class="pay-method-card">
+          <div class="pm-header">
+            <div class="pm-icon">📱</div>
+            <div class="pm-label">QRIS All</div>
+          </div>
+          <img src="QRIS.jpg" class="qris-img" alt="QRIS LcbbbZstore">
+          <a href="QRIS.jpg" download class="dl-btn">
+            <span>⬇️</span> Download
+          </a>
+        </div>
+
+      </div>
+
+      <!-- SECURE BANNER -->
+      <div class="secure-banner">
+        <div class="secure-banner-icon">🛡️</div>
+        <div class="secure-banner-text">
+          100% Secure Payment — Transaksi Aman & Terenkripsi
+          <span>Didukung enkripsi SSL & sistem pembayaran terpercaya</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONI -->
+  <div class="section reveal" id="testi">
+    <div class="sec-hd">
+      <div class="sec-title"><div class="sec-title-icon">⭐</div> Testimoni Pelanggan</div>
+    </div>
+    <div class="testi-wrap">
+      <div class="testi-track">
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar">R</div><div class="testi-user">@Rizky_07</div></div>
+          <div class="testi-text">Fast respon banget adminnya, order jam 2 pagi langsung dibalas!</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar" style="background:linear-gradient(135deg,#7c3aed,#ec4899)">F</div><div class="testi-user">@Fikri_Dev</div></div>
+          <div class="testi-text">Nokos aman dan work buat verif semua platform 👍</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar" style="background:linear-gradient(135deg,#ec4899,#f59e0b)">A</div><div class="testi-user">@Aditya_X</div></div>
+          <div class="testi-text">Followers masuk cepat, real semua gak ada bot ⚡</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar" style="background:linear-gradient(135deg,#10b981,#3b82f6)">M</div><div class="testi-user">@MyBubub</div></div>
+          <div class="testi-text">Testinya banyak banget, udah buktiin sendiri pasti amanah 😎</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">R</div><div class="testi-user">@Rama_Store</div></div>
+          <div class="testi-text">Trusted banget, udah langganan dari 2024! Recommended 💯</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar" style="background:linear-gradient(135deg,#3b82f6,#7c3aed)">D</div><div class="testi-user">@Dika_ML</div></div>
+          <div class="testi-text">Top up ML masuk cepet, harga jauh lebih murah dari tempat lain 🔥</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <!-- duplicate for infinite loop -->
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar">R</div><div class="testi-user">@Rizky_07</div></div>
+          <div class="testi-text">Fast respon banget adminnya, order jam 2 pagi langsung dibalas!</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar" style="background:linear-gradient(135deg,#7c3aed,#ec4899)">F</div><div class="testi-user">@Fikri_Dev</div></div>
+          <div class="testi-text">Nokos aman dan work buat verif semua platform 👍</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar" style="background:linear-gradient(135deg,#ec4899,#f59e0b)">A</div><div class="testi-user">@Aditya_X</div></div>
+          <div class="testi-text">Followers masuk cepat, real semua gak ada bot ⚡</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar" style="background:linear-gradient(135deg,#10b981,#3b82f6)">M</div><div class="testi-user">@MyBubub</div></div>
+          <div class="testi-text">Testinya banyak banget, udah buktiin sendiri pasti amanah 😎</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">R</div><div class="testi-user">@Rama_Store</div></div>
+          <div class="testi-text">Trusted banget, udah langganan dari 2024! Recommended 💯</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-header"><div class="testi-avatar" style="background:linear-gradient(135deg,#3b82f6,#7c3aed)">D</div><div class="testi-user">@Dika_ML</div></div>
+          <div class="testi-text">Top up ML masuk cepet, harga jauh lebih murah dari tempat lain 🔥</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORE STATS -->
+  <div class="store-stats-section section reveal">
+    <div class="sec-hd">
+      <div class="sec-title"><div class="sec-title-icon">📊</div> Statistik Toko</div>
+    </div>
+    <div class="store-stats-grid">
+      <div class="ss-card"><div class="ss-num" id="storeStatOrders" data-store-count="0" data-store-suffix="+">0+</div><div class="ss-lbl">Total Pesanan</div></div>
+      <div class="ss-card"><div class="ss-num" data-fixed="4">4+</div><div class="ss-lbl">Produk</div></div>
+      <div class="ss-card"><div class="ss-num" id="storeStatCustomers" data-store-count="0" data-store-suffix="+">0+</div><div class="ss-lbl">Customer</div></div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section reveal faq-section">
+    <div class="sec-hd">
+      <div class="sec-title"><div class="sec-title-icon">❓</div> FAQ — Pertanyaan Umum</div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>📋 Bagaimana cara order?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Pilih produk yang kamu mau → klik <strong>Order & Bayar</strong> → isi nominal & nama → lanjut ke pembayaran → scan QRIS atau transfer ke DANA → upload bukti pembayaran → klik Kirim. Pesananmu langsung masuk ke admin! 🚀</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>⏱️ Berapa lama proses pesanan?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Setelah bukti pembayaran dikirim, admin memproses dalam <strong>5–15 menit</strong> (jam aktif). Untuk top up game otomatis masuk dalam 5–30 menit. Jika lebih dari 1 jam, langsung hubungi admin via WhatsApp ya kak! 😊</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>🛡️ Apakah transaksi aman?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">100% aman! LcbbbZstore sudah beroperasi sejak 2024 dengan ribuan customer puas. Pembayaran via QRIS resmi dan DANA yang terenkripsi. Data kamu tidak akan disalahgunakan. ✅</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>💸 Apakah bisa refund?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Ya! Kami memberikan <strong>garansi refund</strong> jika layanan tidak sesuai atau gagal diproses. Hubungi admin via WhatsApp dengan menyertakan Order ID kamu. Refund diproses dalam 1×24 jam kerja.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>📦 Bagaimana jika pesanan belum masuk?</span><div class="faq-icon">+</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Jika pesanan belum masuk lebih dari <strong>30 menit</strong> setelah pembayaran, segera hubungi admin via WhatsApp <a href="https://wa.me/6285773286241" style="color:var(--c1)">085773286241</a> dengan menyertakan bukti pembayaran dan Order ID. Admin siap 24 jam! 💬</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KOMUNITAS -->
+  <div class="section reveal">
+    <div class="section-hd"><div class="section-hd-icon">👥</div> Komunitas LcbbbZstore</div>
+    <div class="about-card">
+      <p class="about-text">Gabung komunitas resmi LcbbbZstore untuk dapetin promo terbaru, flash sale, dan diskon spesial setiap hari! 🔥</p>
+      <a href="https://whatsapp.com/channel/0029Vb6T99SCBtxElNqjzr2T" class="btn-join" target="_blank">📢 Join Channel WhatsApp</a>
+    </div>
+  </div>
+
+  <footer>© 2026 <span>LcbbbZstore</span> • Premium Digital Platform</footer>
+</div>
+</div>
+
+<!-- ════════ ORDERS PAGE ════════ -->
+<div class="page" id="page-orders">
+<div class="wrap">
+
+  <!-- Hero Header -->
+  <div class="orders-page-hero reveal">
+    <div class="orders-hero-left">
+      <div class="orders-hero-icon">📦</div>
+      <div>
+        <div class="orders-hero-title">Pesanan Saya</div>
+        <div class="orders-hero-sub">Riwayat &amp; status transaksi kamu</div>
+      </div>
+    </div>
+    <button class="export-btn" onclick="exportOrders()">📥 Export</button>
+  </div>
+
+  <!-- Search -->
+  <div class="search-bar reveal">
+    <input class="search-input" id="orderSearch" placeholder="🔍 Cari order ID atau produk..." oninput="renderOrders()">
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="filter-tabs reveal" id="filterTabs">
+    <div class="ftab active" onclick="setFilter('all',this)">✦ Semua</div>
+    <div class="ftab" onclick="setFilter('pending',this)">⏳ Pending</div>
+    <div class="ftab" onclick="setFilter('verified',this)">✅ Verified</div>
+    <div class="ftab" onclick="setFilter('process',this)">⚙️ Proses</div>
+    <div class="ftab" onclick="setFilter('done',this)">🎉 Selesai</div>
+    <div class="ftab" onclick="setFilter('cancel',this)">❌ Batal</div>
+  </div>
+
+  <div class="orders-list" id="ordersList"></div>
+  <footer>© 2026 <span>LcbbbZstore</span> • Premium Digital Platform</footer>
+</div>
+</div>
+
+<!-- ════════ PROFILE PAGE ════════ -->
+<div class="page" id="page-profile">
+<div class="wrap">
+  <div class="hero-section">
+    <div class="avatar-wrap">
+      <div class="avatar-glow"></div>
+      <div class="avatar-ring"></div>
+      <div class="avatar-inner"></div>
+      <img class="avatar-img" src="LcbbbZ.jpg" alt="LcbbbZstore" onerror="this.style.display='none'">
+    </div>
+    <div class="store-pill"><div class="live-dot"></div> Store Aktif 24 Jam</div>
+    <div class="store-name">LcbbbZstore</div>
+    <div class="store-sub">Store Digital Terpercaya Sejak 2024</div>
+  </div>
+  <div class="stats-strip" style="margin-top:18px">
+    <div class="stat-item"><div class="stat-num">1K+</div><div class="stat-lbl">Customer</div></div>
+    <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-lbl">Online</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Trusted</div></div>
+  </div>
+  <div class="section" style="margin-top:20px">
+    <div class="section-hd"><div class="section-hd-icon">📖</div> Tentang Kami</div>
+    <div class="about-card">
+      <div class="about-text">LcbbbZstore adalah toko digital terpercaya yang menyediakan berbagai layanan digital berkualitas tinggi dengan harga terjangkau. Kami berkomitmen memberikan pelayanan terbaik dengan response time cepat dan hasil yang memuaskan.</div>
+    </div>
+    <div class="about-card">
+      <h3>⭐ Keunggulan Kami</h3>
+      <ul class="check-list">
+        <li>Fast Response — Admin siap 24/7</li>
+        <li>Harga Termurah — Kompetitif di kelasnya</li>
+        <li>Aman & Terpercaya — Ribuan customer puas</li>
+        <li>Garansi Refund — Jika layanan bermasalah</li>
+        <li>Proses Cepat — Instan atau maks 1 jam</li>
+        <li>Support Lengkap — Via WhatsApp & Telegram</li>
+      </ul>
+    </div>
+    <div class="about-card">
+      <h3>🎯 Layanan Kami</h3>
+      <ul class="check-list">
+        <li>Suntik Sosmed (Follow, Like, View)</li>
+        <li>Nomor Virtual / Nokos Internasional</li>
+        <li>Jasa Tebar (Broadcasting Service)</li>
+        <li>Top Up Game (FF, ML, PUBG, COD, dll)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-hd"><div class="section-hd-icon">📞</div> Kontak Resmi</div>
+    <div class="about-card">
+      <div class="contact-row"><span class="contact-icon">📱</span><a href="https://wa.me/6285773286241">WhatsApp: 085773286241</a></div>
+      <div class="contact-row"><span class="contact-icon">✈️</span><a href="https://t.me/LcbbbZstore" target="_blank">Telegram: @LcbbbZstore</a></div>
+      <div class="contact-row"><span class="contact-icon">⏰</span><span>Jam Operasional: 24/7 Non-stop</span></div>
+      <div class="contact-row"><span class="contact-icon">📍</span><span>Lokasi: Indonesia</span></div>
+    </div>
+  </div>
+  <div class="section" style="text-align:center">
+    <div class="section-hd" style="justify-content:center"><div class="section-hd-icon">💬</div> Siap Memesan?</div>
+    <a href="https://wa.me/6285773286241?text=Halo%20kak%20saya%20tertarik%20dengan%20layanan%20LcbbbZstore" class="btn-wa" target="_blank">📱 Chat Admin WhatsApp Sekarang</a>
+    <a href="https://t.me/LcbbbZstore" target="_blank" class="btn-join" style="background:linear-gradient(135deg,#229ED9,#1a7fbf);box-shadow:0 6px 24px rgba(34,158,217,.3)">✈️ Chat via Telegram</a>
+  </div>
+  <footer>© 2026 <span>LcbbbZstore</span> • Premium Digital Platform</footer>
+</div>
+</div>
+
+<!-- ════════ DASHBOARD PAGE ════════ -->
+<div class="page" id="page-dashboard">
+<div class="wrap">
+  <div class="dash-hero">
+    <div class="dash-user-row">
+      <div class="dash-avatar" id="dashAvatar">👤</div>
+      <div class="dash-user-info">
+        <div class="dash-username" id="dashName">Guest User</div>
+        <div class="dash-member-badge member-bronze" id="dashBadge">🥉 Bronze</div>
+      </div>
+      <button class="dash-edit-btn" onclick="openSetup()">✏️ Edit</button>
+    </div>
+    <div class="wallet-strip">
+      <div class="wallet-card">
+        <div class="wallet-lbl">💰 Total Belanja</div>
+        <div class="wallet-val green" id="dashSpend">Rp 0</div>
+      </div>
+      <div class="wallet-card">
+        <div class="wallet-lbl">⭐ Reward Point</div>
+        <div class="wallet-val purple" id="dashPoints">0 pts</div>
+      </div>
+    </div>
+    <div class="level-bar-wrap">
+      <div class="level-bar-top">
+        <span id="levelCurrent">Bronze</span>
+        <span id="levelNext">→ Silver (50K)</span>
+      </div>
+      <div class="level-bar-track">
+        <div class="level-bar-fill" id="levelBar" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card c1"><div class="stat-icon">📦</div><div class="stat-card-val" id="statOrders">0</div><div class="stat-card-lbl">Total Pesanan</div></div>
+    <div class="stat-card c2"><div class="stat-icon">💸</div><div class="stat-card-val" id="statSpend">Rp 0</div><div class="stat-card-lbl">Total Belanja</div></div>
+    <div class="stat-card c3"><div class="stat-icon">✅</div><div class="stat-card-val" id="statDone">0</div><div class="stat-card-lbl">Selesai</div></div>
+    <div class="stat-card c4"><div class="stat-icon">⭐</div><div class="stat-card-val" id="statPoints">0</div><div class="stat-card-lbl">Reward Point</div></div>
+  </div>
+  <div class="section">
+    <div class="sec-hd">
+      <div class="sec-title"><div class="sec-title-icon">📦</div> Pesanan Terbaru</div>
+      <div class="sec-link" onclick="goPage('orders')">Lihat Semua →</div>
+    </div>
+    <div id="recentOrders"><div class="empty"><div class="empty-icon">🛍️</div><div class="empty-text">Belum ada pesanan</div><div class="empty-sub">Mulai belanja sekarang!</div></div></div>
+  </div>
+  <div class="section">
+    <div class="sec-hd"><div class="sec-title"><div class="sec-title-icon">🏆</div> Achievement</div></div>
+    <div class="achiev-grid" id="achievGrid"></div>
+  </div>
+  <div class="section">
+    <div class="sec-hd"><div class="sec-title"><div class="sec-title-icon">📋</div> Aktivitas</div></div>
+    <div class="activity-list" id="activityList"><div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Belum ada aktivitas</div></div></div>
+  </div>
+  <footer>© 2026 <span>LcbbbZstore</span> • Premium Digital Platform</footer>
+</div>
+</div>
+
+<!-- ════════ ADMIN PAGE ════════ -->
+<div class="page" id="page-admin">
+<div class="wrap">
+  <div class="section-hd" style="margin-bottom:18px">
+    <div class="section-hd-icon">🔐</div> Admin Dashboard
+    <div style="margin-left:auto"><button class="dash-edit-btn" onclick="goPage('home')">← Kembali</button></div>
+  </div>
+  <div class="admin-stats">
+    <div class="stat-card c1"><div class="stat-icon">📦</div><div class="stat-card-val" id="adTotal">0</div><div class="stat-card-lbl">Total Pesanan</div></div>
+    <div class="stat-card c2"><div class="stat-icon">⏳</div><div class="stat-card-val" id="adPending">0</div><div class="stat-card-lbl">Pending</div></div>
+    <div class="stat-card c3"><div class="stat-icon">💰</div><div class="stat-card-val" id="adRevenue">Rp 0</div><div class="stat-card-lbl">Total Revenue</div></div>
+    <div class="stat-card c4"><div class="stat-icon">✅</div><div class="stat-card-val" id="adDone">0</div><div class="stat-card-lbl">Selesai</div></div>
+  </div>
+  <div class="section">
+    <div class="sec-hd"><div class="sec-title"><div class="sec-title-icon">📋</div> Semua Pesanan</div></div>
+    <div class="orders-list" id="adminOrdersList"></div>
+  </div>
+  <footer>© 2026 <span>LcbbbZstore</span> • Admin Panel</footer>
+</div>
+</div>
+
+</div><!-- end .app -->
+
+<!-- ════════ FLOATING WHATSAPP ════════ -->
+<a id="wa-float" href="https://wa.me/6285773286241" target="_blank" title="Chat WhatsApp">📱</a>
+
+<!-- ════════ LIVE ORDER NOTIFICATION ════════ -->
+<div id="live-notif">
+  <div class="ln-avatar">🛒</div>
+  <div style="flex:1;min-width:0">
+    <div class="ln-text" id="lnText">Rizky baru membeli Nokos Premium</div>
+    <div class="ln-sub">Baru saja</div>
+  </div>
+  <div class="ln-badge">LIVE</div>
+</div>
+
+<!-- ════════ BOTTOM NAV ════════ -->
+<div class="bnav">
+  <div class="bnav-btn active" id="bn-home" onclick="goPage('home')">
+    <div class="ico">🏠</div><div>Beranda</div>
+  </div>
+  <div class="bnav-btn" id="bn-orders" onclick="goPage('orders')">
+    <div class="ico">📦</div><div>Pesanan</div>
+  </div>
+  <button class="bnav-fab" onclick="openChat()">💬</button>
+  <div class="bnav-btn" id="bn-dashboard" onclick="goPage('dashboard')">
+    <div class="ico">📊</div><div>Dashboard</div>
+  </div>
+  <div class="bnav-btn" id="bn-profile" onclick="goPage('profile')">
+    <div class="ico">🏪</div><div>Toko</div>
+  </div>
+</div>
+
+<!-- ════════ CHAT MODAL ════════ -->
+<div class="modal-overlay" id="chatModal">
+  <div class="chat-sheet">
+    <div class="chat-handle"></div>
+    <div class="chat-header">
+      <div class="bot-av">
+        🤖
+        <div class="bot-av-pulse"></div>
+      </div>
+      <div class="chat-hinfo">
+        <h2>AI Assistant LcbbbZ</h2>
+        <div class="chat-status-row">
+          <div class="chat-online-dot"></div>
+          <span class="chat-online-text">Online 24/7</span>
+        </div>
+      </div>
+      <button class="chat-close" onclick="closeChat()">✕</button>
+    </div>
+    <!-- Info strip -->
+    <div class="chat-info-strip">
+      <div class="chat-info-item"><div class="chat-info-dot"></div> Fast Response</div>
+      <div class="chat-info-item">🟢 Online 24/7</div>
+      <div class="chat-info-item">⚡ Avg &lt; 5s</div>
+    </div>
+    <div class="chat-msgs" id="chatMsgs">
+      <div class="msg-wrap bot">
+        <div class="msg bot">👋 Halo kak! Selamat datang di <strong>LcbbbZstore</strong> 🛒<br><br>Saya siap membantu kamu 24 jam. Tanyakan produk, harga, atau promo kami!<br><br>✨ <em>Pesan langsung ke admin via Telegram</em> 😊</div>
+      </div>
+    </div>
+    <div class="chat-reply-preview" id="replyPreview">
+      <div class="reply-bar"></div>
+      <div class="reply-content">
+        <span class="reply-label">Membalas</span>
+        <span class="reply-text" id="replyText"></span>
+      </div>
+      <button class="reply-cancel" onclick="cancelReply()">✕</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Ketik pesan..." autocomplete="off">
+      <button class="chat-send" onclick="sendMsg()">➤</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAY MODAL ════════ -->
+<div class="pay-overlay" id="payOverlay">
+  <div class="pay-sheet">
+    <div class="pay-hdr">
+      <div>
+        <div class="pay-title">⚡ Pembayaran</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'Inter',sans-serif">Lengkapi data pesanan untuk melanjutkan transaksi</div>
+      </div>
+      <button class="pay-close" onclick="closePayModal()">✕</button>
+    </div>
+    <div class="pay-body">
+      <div class="steps">
+        <div class="step active" id="s1"><div class="step-circle">1</div><div class="step-lbl">Detail</div></div>
+        <div class="step" id="s2"><div class="step-circle">2</div><div class="step-lbl">Pembayaran</div></div>
+        <div class="step" id="s3"><div class="step-circle">✓</div><div class="step-lbl">Selesai</div></div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div id="ps1">
+
+        <!-- Product card premium -->
+        <div style="background:linear-gradient(135deg,rgba(0,229,195,.07),rgba(124,58,237,.05));border:1px solid rgba(0,229,195,.2);border-radius:16px;padding:14px 16px;margin-bottom:16px;position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,rgba(0,229,195,.6),transparent)"></div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 14px rgba(0,229,195,.35)">🛒</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-family:'Inter',sans-serif">Produk Dipilih</div>
+              <div id="prodDisplay" style="font-size:15px;font-weight:800;color:var(--c1);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>
+            </div>
+          </div>
+          <!-- Badges -->
+          <div style="display:flex;gap:5px;margin-top:10px;flex-wrap:wrap">
+            <span style="font-size:9px;font-weight:800;padding:3px 9px;border-radius:20px;background:rgba(0,229,195,.1);border:1px solid rgba(0,229,195,.2);color:var(--c1);font-family:'Inter',sans-serif">⚡ Fast Process</span>
+            <span style="font-size:9px;font-weight:800;padding:3px 9px;border-radius:20px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:#34d399;font-family:'Inter',sans-serif">🔄 Garansi Refill</span>
+            <span style="font-size:9px;font-weight:800;padding:3px 9px;border-radius:20px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#fbbf24;font-family:'Inter',sans-serif">🏆 Best Seller</span>
+          </div>
+          <!-- Mini analytics -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px">
+            <div style="text-align:center;padding:6px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.05)">
+              <div style="font-size:11px;font-weight:900;color:var(--c1)">98%</div>
+              <div style="font-size:9px;color:var(--dim);font-family:'Inter',sans-serif">📈 Kepuasan</div>
+            </div>
+            <div style="text-align:center;padding:6px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.05)">
+              <div style="font-size:11px;font-weight:900;color:#a78bfa">1 Mnt</div>
+              <div style="font-size:9px;color:var(--dim);font-family:'Inter',sans-serif">⚡ Proses</div>
+            </div>
+            <div style="text-align:center;padding:6px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.05)">
+              <div style="font-size:11px;font-weight:900;color:#34d399">100%</div>
+              <div style="font-size:9px;color:var(--dim);font-family:'Inter',sans-serif">🛡 Garansi</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Nominal Pembayaran (Rp)</label>
+          <input class="form-input" type="number" id="nomInput" placeholder="Contoh: 5000" min="1000">
+          <div class="nom-presets">
+            <div class="nom-chip" onclick="setNom(5000)">5K</div>
+            <div class="nom-chip" onclick="setNom(10000)">10K</div>
+            <div class="nom-chip" onclick="setNom(15000)">15K</div>
+            <div class="nom-chip" onclick="setNom(20000)">20K</div>
+            <div class="nom-chip" onclick="setNom(50000)">50K</div>
+            <div class="nom-chip" onclick="setNom(100000)">100K</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nama / Username kamu</label>
+          <input class="form-input" type="text" id="nameInput" placeholder="Nama untuk konfirmasi">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Catatan tambahan (opsional)</label>
+          <input class="form-input" type="text" id="noteInput" placeholder="Contoh: ID game, username, dll">
+        </div>
+        <!-- CTA premium -->
+        <button class="btn-confirm" onclick="goStep2()" style="position:relative;overflow:hidden">
+          <span style="position:relative;z-index:1">Lanjut ke Pembayaran ⚡</span>
+          <span style="position:absolute;top:0;left:-100%;width:60px;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);animation:ctaShine 2.5s ease-in-out infinite"></span>
+        </button>
+        <style>@keyframes ctaShine{0%{left:-100%}100%{left:200%}}</style>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="ps2" style="display:none">
+
+        <!-- ORDER SUMMARY CARD -->
+        <div style="background:linear-gradient(135deg,rgba(0,229,195,.08),rgba(124,58,237,.06));border:1px solid rgba(0,229,195,.18);border-radius:18px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-family:'Inter',sans-serif">Total Bayar</div>
+            <div class="pay-amount-big" id="dispAmt" style="font-size:26px;margin:4px 0 0;text-align:left;text-shadow:0 0 24px rgba(0,229,195,.4)">—</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-family:'Inter',sans-serif">Order ID</div>
+            <div id="dispOid" style="margin-top:4px;font-family:monospace;font-size:12px;color:var(--c1);font-weight:800;letter-spacing:.5px">—</div>
+          </div>
+        </div>
+
+        <!-- PAYMENT METHOD TABS -->
+        <div style="display:flex;gap:8px;margin-bottom:16px">
+          <div id="tabQris" onclick="switchPayTab('qris')" style="flex:1;padding:11px 8px;border-radius:14px;background:rgba(0,229,195,.12);border:1.5px solid rgba(0,229,195,.4);text-align:center;cursor:pointer;transition:all .25s;font-size:12px;font-weight:800;color:var(--c1);font-family:'Inter',sans-serif;letter-spacing:.2px">📱 QRIS</div>
+          <div id="tabDana" onclick="switchPayTab('dana')" style="flex:1;padding:11px 8px;border-radius:14px;background:var(--glass);border:1.5px solid var(--border);text-align:center;cursor:pointer;transition:all .25s;font-size:12px;font-weight:800;color:var(--muted);font-family:'Inter',sans-serif;letter-spacing:.2px">💙 DANA</div>
+        </div>
+
+        <!-- QRIS PANEL -->
+        <div id="panelQris">
+          <div class="pay-qris-wrap" style="position:relative">
+            <div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:12px;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:.8px">Scan QRIS — Semua E-Wallet</div>
+            <img src="QRIS.jpg" class="qris-big" alt="QRIS LcbbbZstore">
+            <div style="display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap">
+              <span style="font-size:10px;font-weight:700;color:rgba(0,229,195,.7);background:rgba(0,229,195,.07);padding:3px 10px;border-radius:8px;border:1px solid rgba(0,229,195,.15);font-family:'Inter',sans-serif">GoPay</span>
+              <span style="font-size:10px;font-weight:700;color:rgba(0,229,195,.7);background:rgba(0,229,195,.07);padding:3px 10px;border-radius:8px;border:1px solid rgba(0,229,195,.15);font-family:'Inter',sans-serif">OVO</span>
+              <span style="font-size:10px;font-weight:700;color:rgba(0,229,195,.7);background:rgba(0,229,195,.07);padding:3px 10px;border-radius:8px;border:1px solid rgba(0,229,195,.15);font-family:'Inter',sans-serif">DANA</span>
+              <span style="font-size:10px;font-weight:700;color:rgba(0,229,195,.7);background:rgba(0,229,195,.07);padding:3px 10px;border-radius:8px;border:1px solid rgba(0,229,195,.15);font-family:'Inter',sans-serif">ShopeePay</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DANA PANEL -->
+        <div id="panelDana" style="display:none">
+          <div style="background:linear-gradient(135deg,rgba(0,80,200,.1),rgba(0,180,255,.06));border:1px solid rgba(0,120,255,.2);border-radius:20px;padding:24px 20px;text-align:center">
+            <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#0064ff,#00b4ff);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px;box-shadow:0 8px 24px rgba(0,100,255,.4)">💙</div>
+            <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-family:'Inter',sans-serif;margin-bottom:10px">Nomor DANA</div>
+            <div style="font-size:28px;font-weight:900;color:#60b4ff;letter-spacing:1px;margin-bottom:16px;text-shadow:0 0 24px rgba(0,150,255,.4)">085773286241</div>
+            <button onclick="navigator.clipboard.writeText('085773286241').then(()=>toast('✅ Nomor DANA disalin!','ok'))" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:13px;background:rgba(0,100,255,.15);border:1px solid rgba(0,150,255,.3);color:#60b4ff;font-size:13px;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;transition:all .25s">📋 Salin Nomor</button>
+          </div>
+        </div>
+
+        <!-- TIMER -->
+        <div class="timer-box" style="margin-top:16px">⏰ Selesaikan dalam: <span class="timer" id="timerDisp">15:00</span></div>
+        <div class="expired-box" id="expiredBox">⏰ Waktu habis! Klik Kembali untuk memulai ulang.</div>
+
+        <!-- UPLOAD BUKTI -->
+        <div style="margin-top:20px">
+          <div class="form-label" style="display:flex;align-items:center;gap:6px">
+            <span style="width:3px;height:14px;background:linear-gradient(var(--c1),var(--c2));border-radius:2px;display:inline-block;flex-shrink:0"></span>
+            Upload Bukti Pembayaran
+          </div>
+          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+            <div class="upload-icon">📸</div>
+            <div class="upload-text">Tap untuk upload screenshot</div>
+            <div class="upload-sub">JPG, PNG, maksimal 5MB</div>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(this)">
+          <div class="preview-wrap" id="previewWrap">
+            <img class="preview-img" id="previewImg" src="" alt="">
+            <button class="remove-file" onclick="removeFile()">✕</button>
+          </div>
+        </div>
+
+        <button class="btn-confirm" id="confirmBtn" onclick="kirimBukti()" disabled style="position:relative;overflow:hidden">
+          <span style="position:relative;z-index:1">📤 Kirim Bukti Pembayaran</span>
+        </button>
+        <button class="btn-back" onclick="goStep1()">← Kembali</button>
+      </div>
+
+      <!-- STEP 3 -->
+      <div id="ps3" style="display:none">
+        <div class="success">
+          <div class="suc-anim">
+            <div class="suc-circle">✅</div>
+          </div>
+          <div class="suc-title">Bukti Terkirim!</div>
+          <div class="suc-sub">Bukti pembayaran berhasil dikirim ke admin.<br>Pesananmu akan diproses dalam <strong>5–15 menit</strong> 🚀</div>
+          <div class="suc-info">
+            <div class="info-row"><span class="info-lbl">Order ID</span><span class="info-val" style="font-family:monospace;font-size:12px" id="sucOid">—</span></div>
+            <div class="info-row"><span class="info-lbl">Produk</span><span class="info-val" id="sucProd">—</span></div>
+            <div class="info-row"><span class="info-lbl">Nominal</span><span class="info-val green" id="sucAmt">—</span></div>
+            <div class="info-row"><span class="info-lbl">Status</span><span class="info-val" style="color:var(--c4)">⏳ Menunggu Verifikasi</span></div>
+          </div>
+          <a href="https://wa.me/6285773286241" class="btn-wa" target="_blank">📱 Konfirmasi ke Admin WhatsApp</a>
+          <button class="btn-new" onclick="resetPay()">+ Pesanan Baru</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ ORDER DETAIL MODAL ════════ -->
+<div class="modal-bg" id="orderDetailModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-hdr">
+      <div class="modal-title">📦 Detail Pesanan</div>
+      <button class="modal-close" onclick="closeOrderDetail()">✕</button>
+    </div>
+    <div class="modal-body" id="orderDetailBody"></div>
+  </div>
+</div>
+
+<!-- ════════ USER SETUP MODAL ════════ -->
+<div class="setup-modal" id="setupModal">
+  <div class="setup-card">
+    <div class="setup-title">👋 Selamat Datang!</div>
+    <div class="setup-sub">Setup profil kamu untuk pengalaman belanja yang lebih personal</div>
+    <div class="form-group">
+      <label class="form-label">Nama kamu</label>
+      <input class="form-input" id="setupName" placeholder="Masukkan nama kamu" maxlength="30">
+    </div>
+    <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif">Pilih avatar</div>
+    <div class="setup-avatar-row">
+      <div class="setup-av selected" onclick="selectAv(this,'😎')">😎</div>
+      <div class="setup-av" onclick="selectAv(this,'🦊')">🦊</div>
+      <div class="setup-av" onclick="selectAv(this,'🐱')">🐱</div>
+      <div class="setup-av" onclick="selectAv(this,'🤖')">🤖</div>
+      <div class="setup-av" onclick="selectAv(this,'👑')">👑</div>
+    </div>
+    <button class="setup-btn" onclick="saveSetup()">🚀 Mulai Belanja</button>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="admin-login-modal" id="adminLoginModal">
+  <div class="admin-login-card">
+    <div class="setup-title" style="margin-bottom:7px">🔐 Admin Login</div>
+    <div class="setup-sub">Masukkan password admin untuk akses panel</div>
+    <div class="form-group">
+      <label class="form-label">Password Admin</label>
+      <input class="form-input" type="password" id="adminPwInput" placeholder="Masukkan password">
+    </div>
+    <button class="btn-confirm" style="margin-top:4px" onclick="checkAdminPw()">🔓 Login Admin</button>
+    <button class="btn-back" onclick="document.getElementById('adminLoginModal').classList.remove('open')">Batal</button>
+  </div>
+</div>
+
+<audio id="audio" loop><source src="Tulus.mp3" type="audio/mpeg"></audio>
+
+<script>
+/* ═══════════════════════════════════════════
+   CONFIG
+═══════════════════════════════════════════ */
+const CHAT_TOKEN  = "8857627128:AAHDGMoofJmIYsIQ1qsumO170KzDvbl4ovQ";
+const ORDER_TOKEN = "8812518169:AAFW4Dc7_GNQL9K0onA4Bb2E3LE6hg5GtmU";
+const ADMIN_ID    = "7112525335";
+const ADMIN_PW    = "lcbbbz2024";
+
+/* ═══════════════════════════════════════════
+   PREMIUM LOADING SCREEN — FIXED
+═══════════════════════════════════════════ */
+(function initLoader(){
+  const pct=document.getElementById('loaderPct');
+  let p=0;
+  const iv=setInterval(()=>{
+    p=Math.min(p+Math.random()*7+2,92);
+    if(pct)pct.textContent=Math.floor(p)+'%';
+  },55);
+
+  function dismissLoader(){
+    if(dismissLoader._done)return;
+    dismissLoader._done=true;
+    clearInterval(iv);
+    if(pct)pct.textContent='100%';
+    setTimeout(()=>{
+      const loader=document.getElementById('loader');
+      if(!loader)return;
+      loader.classList.add('out');
+      setTimeout(()=>{loader.style.display='none'},700);
+      if(typeof initReveal==='function')initReveal();
+      if(typeof animateCounters==='function')animateCounters();
+      if(typeof updateStoreStats==='function')updateStoreStats();
+    },800);
+  }
+
+  // Fallback: if load event already fired or fires late
+  if(document.readyState==='complete'){
+    dismissLoader();
+  } else {
+    window.addEventListener('load',dismissLoader,{once:true});
+    // Hard timeout safety: never stuck more than 4s
+    setTimeout(dismissLoader,4000);
+  }
+})();
+
+/* ═══════════════════════════════════════════
+   STARS
+═══════════════════════════════════════════ */
+(()=>{
+  const el=document.getElementById('stars');
+  for(let i=0;i<120;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*2.2+.4;
+    s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${Math.random()*5+2.5}s;animation-delay:${Math.random()*7}s`;
+    el.appendChild(s);
+  }
+})();
+
+/* ═══════════════════════════════════════════
+   BUTTON RIPPLE
+═══════════════════════════════════════════ */
+document.addEventListener('click',e=>{
+  const btn=e.target.closest('.btn-buy,.btn-confirm,.setup-btn,.btn-join,.btn-wa');
+  if(!btn)return;
+  const r=document.createElement('span');r.className='ripple';
+  const rect=btn.getBoundingClientRect();
+  const sz=Math.max(rect.width,rect.height)*2;
+  r.style.cssText=`width:${sz}px;height:${sz}px;left:${e.clientX-rect.left-sz/2}px;top:${e.clientY-rect.top-sz/2}px`;
+  btn.appendChild(r);setTimeout(()=>r.remove(),500);
+});
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+function initReveal(){
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+  },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+
+/* ═══════════════════════════════════════════
+   COUNTER ANIMATION
+═══════════════════════════════════════════ */
+function animateCounters(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseInt(el.dataset.count);
+    const suffix=el.dataset.suffix||'';
+    let current=0;const step=target/60;
+    const timer=setInterval(()=>{
+      current=Math.min(current+step,target);
+      el.textContent=Math.floor(current)+suffix;
+      if(current>=target)clearInterval(timer);
+    },16);
+  });
+}
+
+/* ═══════════════════════════════════════════
+   LOCALSTORAGE DB
+═══════════════════════════════════════════ */
+const DB={
+  get(k){try{return JSON.parse(localStorage.getItem('lcb_'+k))||null}catch{return null}},
+  set(k,v){localStorage.setItem('lcb_'+k,JSON.stringify(v))},
+  push(k,item){const a=DB.get(k)||[];a.push(item);DB.set(k,a)},
+  del(k){localStorage.removeItem('lcb_'+k)}
+};
+
+/* ═══════════════════════════════════════════
+   USER / MEMBERSHIP
+═══════════════════════════════════════════ */
+const LEVELS=[
+  {name:'Bronze',  emoji:'🥉',cls:'member-bronze',  min:0,      max:50000},
+  {name:'Silver',  emoji:'🥈',cls:'member-silver',  min:50000,  max:150000},
+  {name:'Gold',    emoji:'🥇',cls:'member-gold',    min:150000, max:350000},
+  {name:'Platinum',emoji:'💎',cls:'member-platinum',min:350000, max:700000},
+  {name:'Diamond', emoji:'💠',cls:'member-diamond', min:700000, max:Infinity}
+];
+function getUser(){return DB.get('user')||{name:'Guest',avatar:'👤',totalSpend:0,points:0,joinDate:new Date().toISOString()}}
+function getMemberLevel(spend){for(let i=LEVELS.length-1;i>=0;i--)if(spend>=LEVELS[i].min)return LEVELS[i];return LEVELS[0]}
+function awardPoints(amount){
+  const u=getUser();const pts=Math.floor(amount/1000);
+  u.points=(u.points||0)+pts;DB.set('user',u);
+  if(pts>0)logActivity(`⭐ +${pts} Reward Point dari pembelian!`,pts);
+}
+
+/* ═══════════════════════════════════════════
+   ORDERS DB
+═══════════════════════════════════════════ */
+function getOrders(){return DB.get('orders')||[]}
+function saveOrders(orders){DB.set('orders',orders)}
+function genOrderId(){
+  const rand=Math.floor(100000+Math.random()*900000);
+  return `LCB-${rand}`;
+}
+function createOrder(prod,amount,name,note,imageData){
+  const id=genOrderId();
+  const order={id,prod,amount,name,note,imageData:imageData||null,status:'pending',adminNote:'',createdAt:new Date().toISOString(),timeline:[{status:'pending',label:'Menunggu Pembayaran',time:new Date().toISOString()}]};
+  const orders=getOrders();orders.unshift(order);saveOrders(orders);
+  const u=getUser();u.totalSpend=(u.totalSpend||0)+amount;DB.set('user',u);
+  awardPoints(amount);logActivity(`📦 Pesanan ${id} dibuat — ${prod}`,null,id);checkAchievements();
+  if(typeof updateStoreStats==='function')updateStoreStats();
+  return order;
+}
+function updateOrderStatus(orderId,status,adminNote){
+  const orders=getOrders();const order=orders.find(o=>o.id===orderId);if(!order)return;
+  order.status=status;if(adminNote!==undefined)order.adminNote=adminNote;
+  const labelMap={pending:'Menunggu Pembayaran',verified:'Pembayaran Diverifikasi',process:'Sedang Diproses',done:'Pesanan Selesai',cancel:'Dibatalkan'};
+  order.timeline.push({status,label:labelMap[status]||status,time:new Date().toISOString()});
+  saveOrders(orders);logActivity(`🔄 Status pesanan ${orderId} → ${labelMap[status]||status}`);
+  if(status==='done')toast(`🎉 Pesanan ${orderId} selesai!`,'ok');
+}
+
+/* ═══════════════════════════════════════════
+   ACTIVITY LOG
+═══════════════════════════════════════════ */
+function logActivity(text,val,orderId){
+  const logs=DB.get('logs')||[];logs.unshift({text,val,orderId,time:new Date().toISOString()});
+  if(logs.length>50)logs.length=50;DB.set('logs',logs);
+}
+function renderActivity(){
+  const logs=DB.get('logs')||[];
+  const el=document.getElementById('activityList');if(!el)return;
+  if(logs.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Belum ada aktivitas</div></div>';return}
+  el.innerHTML=logs.slice(0,8).map(l=>`<div class="activity-item"><div class="activity-dot"></div><div class="activity-text">${l.text}</div><div class="activity-time">${fmtDate(l.time)}</div></div>`).join('');
+}
+
+/* ═══════════════════════════════════════════
+   ACHIEVEMENTS
+═══════════════════════════════════════════ */
+const ACHIEVEMENTS=[
+  {id:'first',icon:'🎯',name:'First Purchase',desc:'Beli pertama kali',check:()=>getOrders().length>=1},
+  {id:'orders5',icon:'📦',name:'5 Pesanan',desc:'Total 5 pesanan',check:()=>getOrders().length>=5},
+  {id:'orders10',icon:'🏅',name:'10 Pesanan',desc:'Total 10 pesanan',check:()=>getOrders().length>=10},
+  {id:'spend50',icon:'💰',name:'Big Spender',desc:'Belanja 50K+',check:()=>(getUser().totalSpend||0)>=50000},
+  {id:'spend200',icon:'👑',name:'VIP Customer',desc:'Belanja 200K+',check:()=>(getUser().totalSpend||0)>=200000},
+  {id:'gold',icon:'🥇',name:'Gold Member',desc:'Raih level Gold',check:()=>['Gold','Platinum','Diamond'].includes(getMemberLevel(getUser().totalSpend||0).name)},
+];
+function checkAchievements(){
+  const unlocked=DB.get('achievements')||[];
+  ACHIEVEMENTS.forEach(a=>{
+    if(!unlocked.includes(a.id)&&a.check()){
+      unlocked.push(a.id);DB.set('achievements',unlocked);
+      toast(`🏆 Achievement unlocked: ${a.name}!`,'ok');
+      logActivity(`🏆 Achievement "${a.name}" terbuka!`);
+    }
+  });
+  renderAchievements();
+}
+function renderAchievements(){
+  const unlocked=DB.get('achievements')||[];
+  const grid=document.getElementById('achievGrid');if(!grid)return;
+  grid.innerHTML=ACHIEVEMENTS.map(a=>`<div class="achiev-card ${unlocked.includes(a.id)?'unlocked':'locked'}">${unlocked.includes(a.id)?'<div class="achiev-badge">✓</div>':''}<div class="achiev-icon">${a.icon}</div><div class="achiev-name">${a.name}</div></div>`).join('');
+}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════ */
+const PAGES=['home','dashboard','orders','profile','admin'];
+const BN_MAP={home:'bn-home',orders:'bn-orders',dashboard:'bn-dashboard',profile:'bn-profile'};
+function goPage(name){
+  PAGES.forEach(p=>document.getElementById('page-'+p)?.classList.toggle('active',p===name));
+  Object.entries(BN_MAP).forEach(([p,id])=>document.getElementById(id)?.classList.toggle('active',p===name));
+  window.scrollTo(0,0);closeDropdown();
+  if(name==='dashboard')renderDashboard();
+  if(name==='orders')renderOrders();
+  if(name==='admin')renderAdmin();
+}
+function scrollTo_(sel){
+  goPage('home');setTimeout(()=>document.querySelector(sel)?.scrollIntoView({behavior:'smooth',block:'start'}),120);
+}
+
+/* ═══════════════════════════════════════════
+   DROPDOWN
+═══════════════════════════════════════════ */
+function toggleDropdown(){document.getElementById('dropdown').classList.toggle('open')}
+function closeDropdown(){document.getElementById('dropdown').classList.remove('open')}
+document.addEventListener('click',e=>{
+  const dd=document.getElementById('dropdown');
+  if(!dd.contains(e.target)&&!e.target.closest('#notifBtn'))dd.classList.remove('open');
+});
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+function toast(msg,type='',dur=4500){
+  const stack=document.getElementById('toastStack');
+  const el=document.createElement('div');el.className=`toast ${type}`;
+  const icons={ok:'✅',err:'❌',warn:'⚠️',info:'ℹ️'};
+  el.innerHTML=`<span style="font-size:17px">${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
+  stack.appendChild(el);
+  setTimeout(()=>{el.classList.add('toast-out');setTimeout(()=>el.remove(),300)},dur);
+}
+
+/* ═══════════════════════════════════════════
+   USER SETUP
+═══════════════════════════════════════════ */
+let selectedAv='😎';
+function selectAv(el,av){
+  document.querySelectorAll('.setup-av').forEach(a=>a.classList.remove('selected'));
+  el.classList.add('selected');selectedAv=av;
+}
+function openSetup(){
+  const u=getUser();
+  document.getElementById('setupName').value=u.name!=='Guest'?u.name:'';
+  document.getElementById('setupModal').classList.add('open');
+}
+function saveSetup(){
+  const name=document.getElementById('setupName').value.trim()||'Shopper';
+  const u=getUser();u.name=name;u.avatar=selectedAv;DB.set('user',u);
+  document.getElementById('setupModal').classList.remove('open');
+  toast(`👋 Halo ${name}! Selamat datang di LcbbbZstore!`,'ok');
+  renderDashboard();
+}
+setTimeout(()=>{const u=DB.get('user');if(!u||u.name==='Guest')openSetup()},3200);
+
+/* ═══════════════════════════════════════════
+   DASHBOARD RENDER
+═══════════════════════════════════════════ */
+function renderDashboard(){
+  const u=getUser();const orders=getOrders();const doneOrders=orders.filter(o=>o.status==='done');
+  const level=getMemberLevel(u.totalSpend||0);const nextLevel=LEVELS[Math.min(LEVELS.indexOf(level)+1,LEVELS.length-1)];
+  const progress=level===LEVELS[LEVELS.length-1]?100:Math.min(100,Math.round(((u.totalSpend||0)-level.min)/(nextLevel.min-level.min)*100));
+  document.getElementById('dashAvatar').textContent=u.avatar||'👤';
+  document.getElementById('dashName').textContent=u.name||'Guest';
+  const badge=document.getElementById('dashBadge');
+  badge.textContent=`${level.emoji} ${level.name}`;badge.className=`dash-member-badge ${level.cls}`;
+  document.getElementById('dashSpend').textContent='Rp '+fmt(u.totalSpend||0);
+  document.getElementById('dashPoints').textContent=(u.points||0)+' pts';
+  document.getElementById('levelCurrent').textContent=level.name;
+  document.getElementById('levelNext').textContent=level===LEVELS[LEVELS.length-1]?'Level Tertinggi!':`→ ${nextLevel.name} (${fmt(nextLevel.min)})`;
+  document.getElementById('levelBar').style.width=progress+'%';
+  document.getElementById('statOrders').textContent=orders.length;
+  document.getElementById('statSpend').textContent='Rp '+fmt(u.totalSpend||0);
+  document.getElementById('statDone').textContent=doneOrders.length;
+  document.getElementById('statPoints').textContent=u.points||0;
+  const recent=orders.slice(0,3);const rEl=document.getElementById('recentOrders');
+  if(recent.length===0){rEl.innerHTML='<div class="empty"><div class="empty-icon">🛍️</div><div class="empty-text">Belum ada pesanan</div><div class="empty-sub">Mulai belanja sekarang!</div></div>'}
+  else{rEl.innerHTML='<div class="orders-list">'+recent.map(orderCardHTML).join('')+'</div>'}
+  renderAchievements();renderActivity();
+}
+
+/* ═══════════════════════════════════════════
+   RENDER ORDERS
+═══════════════════════════════════════════ */
+let currentFilter='all';
+function setFilter(f,el){
+  currentFilter=f;document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');renderOrders();
+}
+function renderOrders(){
+  showSkeletonOrders();
+  setTimeout(()=>{
+  const q=(document.getElementById('orderSearch')?.value||'').toLowerCase();
+  let orders=getOrders();
+  if(currentFilter!=='all')orders=orders.filter(o=>o.status===currentFilter);
+  if(q)orders=orders.filter(o=>o.id.toLowerCase().includes(q)||o.prod.toLowerCase().includes(q));
+  const el=document.getElementById('ordersList');if(!el)return;
+  el.innerHTML=orders.length?orders.map(orderCardHTML).join(''):'<div class="empty"><div class="empty-icon">📭</div><div class="empty-text">Tidak ada pesanan</div><div class="empty-sub">Coba ubah filter atau kata kunci</div></div>';
+  },350);
+}
+const STATUS_MAP={pending:{cls:'s-pending',lbl:'⏳ Pending'},verified:{cls:'s-verified',lbl:'✅ Terverifikasi'},process:{cls:'s-process',lbl:'⚙️ Diproses'},done:{cls:'s-done',lbl:'🎉 Selesai'},cancel:{cls:'s-cancel',lbl:'❌ Dibatalkan'}};
+const PROD_ICONS_MAP={'Suntik Sosmed':'💉','Nokos Premium':'📲','Jasa Tebar':'🚀','Top Up All Game':'🎮','Top Up Game':'🎮'};
+function orderCardHTML(o){
+  const s=STATUS_MAP[o.status]||STATUS_MAP.pending;
+  const icon=PROD_ICONS_MAP[o.prod]||'🛒';
+  return `<div class="order-card" onclick="openOrderDetail('${o.id}')">
+    <div class="order-card-inner">
+      <div class="order-top">
+        <div class="order-id">#${o.id}</div>
+        <div class="order-status ${s.cls}">${s.lbl}</div>
+      </div>
+      <div class="order-main">
+        <div class="order-prod-icon">${icon}</div>
+        <div class="order-prod">${o.prod}</div>
+      </div>
+    </div>
+    <div class="order-footer">
+      <div class="order-price">Rp ${fmt(o.amount)}</div>
+      <div class="order-date">${fmtDate(o.createdAt)}</div>
+      <div class="order-arrow">›</div>
+    </div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════
+   ORDER DETAIL MODAL
+═══════════════════════════════════════════ */
+function openOrderDetail(id){
+  const order=getOrders().find(o=>o.id===id);if(!order)return;
+  const s=STATUS_MAP[order.status]||STATUS_MAP.pending;
+  const statusOrder=['pending','verified','process','done'];
+  const curIdx=statusOrder.indexOf(order.status);
+  const timelineHTML=statusOrder.map((st,i)=>{
+    const tl=order.timeline.find(t=>t.status===st);
+    const isDone=i<curIdx||(order.status===st&&st==='done');
+    const isActive=order.status===st&&st!=='done';
+    const labelMap={pending:'Menunggu Pembayaran',verified:'Pembayaran Diverifikasi',process:'Sedang Diproses',done:'Pesanan Selesai'};
+    return `<div class="tl-item ${isDone?'done':isActive?'active':''}"><div class="tl-dot">${isDone?'✓':isActive?'●':''}</div><div class="tl-content"><div class="tl-label">${labelMap[st]}</div><div class="tl-time">${tl?fmtDate(tl.time):'Belum'}</div></div></div>`;
+  }).join('');
+  document.getElementById('orderDetailBody').innerHTML=`
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div class="order-status ${s.cls}" style="font-size:12px">${s.lbl}</div>
+      <div style="font-size:11px;color:var(--muted);font-family:monospace">${order.id}</div>
+    </div>
+    <div class="card card-sm" style="margin-bottom:16px">
+      <div class="detail-row"><span class="dr-lbl">Produk</span><span class="dr-val">${order.prod}</span></div>
+      <div class="detail-row"><span class="dr-lbl">Nama</span><span class="dr-val">${order.name}</span></div>
+      <div class="detail-row"><span class="dr-lbl">Nominal</span><span class="dr-val green">Rp ${fmt(order.amount)}</span></div>
+      ${order.note?`<div class="detail-row"><span class="dr-lbl">Catatan</span><span class="dr-val">${order.note}</span></div>`:''}
+      ${order.adminNote?`<div class="detail-row"><span class="dr-lbl">Catatan Admin</span><span class="dr-val" style="color:var(--c4)">${order.adminNote}</span></div>`:''}
+    </div>
+    <div style="font-size:12px;font-weight:800;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif">Timeline Pesanan</div>
+    <div class="timeline">${timelineHTML}</div>
+    ${order.imageData?`<div style="margin-top:14px"><div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px;font-family:'Inter',sans-serif">Bukti Pembayaran</div><img src="${order.imageData}" style="width:100%;border-radius:12px;max-height:220px;object-fit:cover"></div>`:''}
+    <a href="https://wa.me/6285773286241?text=Halo%20admin%2C%20saya%20mau%20konfirmasi%20pesanan%20${order.id}" target="_blank" class="btn-wa" style="margin-top:16px">📱 Konfirmasi ke Admin</a>`;
+  document.getElementById('orderDetailModal').classList.add('open');
+}
+function closeOrderDetail(){document.getElementById('orderDetailModal').classList.remove('open')}
+document.getElementById('orderDetailModal').addEventListener('click',e=>{if(e.target===document.getElementById('orderDetailModal'))closeOrderDetail()});
+
+/* ═══════════════════════════════════════════
+   ADMIN FUNCTIONS
+═══════════════════════════════════════════ */
+function showAdmin(){
+  document.getElementById('adminLoginModal').classList.add('open');
+  setTimeout(()=>document.getElementById('adminPwInput').focus(),100);
+}
+function checkAdminPw(){
+  const pw=document.getElementById('adminPwInput').value;
+  if(pw===ADMIN_PW){document.getElementById('adminLoginModal').classList.remove('open');document.getElementById('adminPwInput').value='';goPage('admin');toast('✅ Login admin berhasil','ok')}
+  else{toast('❌ Password salah','err')}
+}
+document.getElementById('adminLoginModal').addEventListener('click',e=>{if(e.target===document.getElementById('adminLoginModal'))document.getElementById('adminLoginModal').classList.remove('open')});
+document.getElementById('adminPwInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkAdminPw()});
+
+function renderAdmin(){
+  const orders=getOrders();const pending=orders.filter(o=>o.status==='pending');const done=orders.filter(o=>o.status==='done');const revenue=orders.reduce((a,o)=>a+o.amount,0);
+  document.getElementById('adTotal').textContent=orders.length;document.getElementById('adPending').textContent=pending.length;document.getElementById('adRevenue').textContent='Rp '+fmt(revenue);document.getElementById('adDone').textContent=done.length;
+  const el=document.getElementById('adminOrdersList');
+  if(orders.length===0){el.innerHTML='<div class="empty"><div class="empty-icon">📭</div><div class="empty-text">Belum ada pesanan</div></div>';return}
+  el.innerHTML=orders.map(o=>{
+    const s=STATUS_MAP[o.status]||STATUS_MAP.pending;
+    return `<div class="admin-order-item"><div class="ao-top"><div class="ao-id">${o.id}</div><div class="order-status ${s.cls}">${s.lbl}</div></div><div class="ao-prod">${o.prod}</div><div class="ao-bottom"><div class="ao-user">👤 ${o.name}</div><div class="ao-price">Rp ${fmt(o.amount)}</div></div><div style="margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><select class="status-select" onchange="adminUpdateStatus('${o.id}',this.value)"><option value="pending" ${o.status==='pending'?'selected':''}>⏳ Pending</option><option value="verified" ${o.status==='verified'?'selected':''}>✅ Terverifikasi</option><option value="process" ${o.status==='process'?'selected':''}>⚙️ Diproses</option><option value="done" ${o.status==='done'?'selected':''}>🎉 Selesai</option><option value="cancel" ${o.status==='cancel'?'selected':''}>❌ Dibatalkan</option></select><button onclick="adminDeleteOrder('${o.id}')" style="padding:5px 12px;border-radius:9px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#f87171;font-size:11px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">🗑️ Hapus</button></div><div class="note-form"><input class="note-input" id="note_${o.id}" placeholder="Catatan admin..." value="${o.adminNote||''}"><button class="note-btn" onclick="adminSaveNote('${o.id}')">Simpan</button></div></div>`;
+  }).join('');
+}
+function adminUpdateStatus(id,status){updateOrderStatus(id,status);renderAdmin();toast(`✅ Status pesanan ${id} diperbarui`,'ok')}
+function adminSaveNote(id){const note=document.getElementById('note_'+id)?.value||'';updateOrderStatus(id,getOrders().find(o=>o.id===id)?.status||'pending',note);toast('💾 Catatan disimpan','ok')}
+function adminDeleteOrder(id){if(!confirm('Hapus pesanan '+id+'?'))return;const orders=getOrders().filter(o=>o.id!==id);saveOrders(orders);renderAdmin();toast('🗑️ Pesanan dihapus','warn')}
+
+/* ═══════════════════════════════════════════
+   DETAIL TOGGLE
+═══════════════════════════════════════════ */
+function toggleDetail(id,btn){
+  const el=document.getElementById(id);el.classList.toggle('open');
+  btn.textContent=el.classList.contains('open')?'🔼 Tutup':'📄 Detail';
+}
+
+/* ═══════════════════════════════════════════
+   COPY DANA
+═══════════════════════════════════════════ */
+function copyDana(){
+  const num=document.getElementById('danaNum').innerText;
+  navigator.clipboard.writeText(num)
+    .then(()=>{
+      toast('✅ Nomor DANA berhasil disalin!','ok');
+      const btn=document.getElementById('copyBtn');
+      if(btn){
+        btn.classList.add('copied');
+        btn.innerHTML='<span>✅</span> Tersalin!';
+        setTimeout(()=>{
+          btn.classList.remove('copied');
+          btn.innerHTML='<span>📋</span> Salin Nomor';
+        },2500);
+      }
+    })
+    .catch(()=>toast('❌ Gagal menyalin','err'));
+}
+
+/* ═══════════════════════════════════════════
+   MUSIC PLAYER PREMIUM
+═══════════════════════════════════════════ */
+const audio=document.getElementById('audio');
+let playing=false;
+let vinylAngle=0;
+let vinylRAF=null;
+let vinylLastTime=0;
+const VINYL_SPEED=90; // degrees/sec
+
+function updateVinyl(ts){
+  if(!vinylLastTime)vinylLastTime=ts;
+  const dt=(ts-vinylLastTime)/1000;
+  vinylLastTime=ts;
+  vinylAngle=(vinylAngle+VINYL_SPEED*dt)%360;
+  const v=document.getElementById('vinylDisc');
+  if(v)v.style.transform=`rotate(${vinylAngle}deg)`;
+  vinylRAF=requestAnimationFrame(updateVinyl);
+}
+function stopVinylAnim(){
+  if(vinylRAF){cancelAnimationFrame(vinylRAF);vinylRAF=null}
+  vinylLastTime=0;
+}
+
+function updateProgress(){
+  if(!audio||!audio.duration)return;
+  const pct=(audio.currentTime/audio.duration)*100;
+  const fill=document.getElementById('pFill');
+  if(fill)fill.style.width=pct+'%';
+  const fmt=(s)=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+  const tl=document.getElementById('pTimeLeft');
+  const td=document.getElementById('pTimeDur');
+  if(tl)tl.textContent=fmt(audio.currentTime);
+  if(td&&audio.duration)td.textContent=fmt(audio.duration);
+}
+audio.addEventListener('timeupdate',updateProgress);
+audio.addEventListener('loadedmetadata',updateProgress);
+
+function seekMusic(e){
+  if(!audio||!audio.duration)return;
+  const rect=document.getElementById('pTrack').getBoundingClientRect();
+  const pct=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
+  audio.currentTime=pct*audio.duration;
+}
+
+function toggleMusic(){
+  playing=!playing;
+  const pp=document.getElementById('playerPremium');
+  const btn=document.getElementById('playBtnPrem');
+  const npDot=document.getElementById('npDot');
+  const npLabel=document.getElementById('npLabel');
+  if(playing){
+    audio.play();
+    if(btn)btn.textContent='⏸';
+    if(pp)pp.classList.add('playing');
+    if(npDot)npDot.classList.remove('off');
+    if(npLabel)npLabel.textContent='Now Playing';
+    stopVinylAnim();
+    vinylLastTime=0;
+    vinylRAF=requestAnimationFrame(updateVinyl);
+  }else{
+    audio.pause();
+    if(btn)btn.textContent='▶';
+    if(pp)pp.classList.remove('playing');
+    if(npDot)npDot.classList.add('off');
+    if(npLabel)npLabel.textContent='Paused';
+    stopVinylAnim();
+    // Keep vinyl angle where it stopped
+  }
+}
+
+// Autoplay attempt
+audio.play().then(()=>{
+  playing=true;
+  const pp=document.getElementById('playerPremium');
+  const btn=document.getElementById('playBtnPrem');
+  const npDot=document.getElementById('npDot');
+  const npLabel=document.getElementById('npLabel');
+  if(btn)btn.textContent='⏸';
+  if(pp)pp.classList.add('playing');
+  if(npDot)npDot.classList.remove('off');
+  if(npLabel)npLabel.textContent='Now Playing';
+  vinylRAF=requestAnimationFrame(updateVinyl);
+}).catch(()=>{});
+
+/* ═══════════════════════════════════════════
+   CHAT
+═══════════════════════════════════════════ */
+let lastUpdateId=0;const shownIds=new Set();let replyTo=null;
+const chatModal=document.getElementById('chatModal');const chatMsgs=document.getElementById('chatMsgs');
+
+function openChat(){chatModal.classList.add('active');setTimeout(()=>{chatMsgs.scrollTop=chatMsgs.scrollHeight},100)}
+function closeChat(){chatModal.classList.remove('active');document.getElementById('chatInput').blur();cancelReply()}
+chatModal.addEventListener('click',e=>{if(e.target===chatModal)closeChat()});
+
+function getTime(){const n=new Date();return n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0')}
+function addMsg(text,type,quoted){
+  const wrap=document.createElement('div');wrap.className=`msg-wrap ${type}`;
+  if(quoted){const q=document.createElement('div');q.className='msg-quoted';q.textContent=quoted;wrap.appendChild(q)}
+  const d=document.createElement('div');d.className=`msg ${type}`;d.innerHTML=text;
+  d.addEventListener('click',()=>setReply(text,type));wrap.appendChild(d);
+  const t=document.createElement('div');t.className='msg-time';t.textContent=getTime();wrap.appendChild(t);
+  chatMsgs.appendChild(wrap);
+  setTimeout(()=>chatMsgs.scrollTo({top:chatMsgs.scrollHeight,behavior:'smooth'}),30);
+}
+function setReply(text,type){
+  replyTo={text,type};document.getElementById('replyText').textContent=text.replace(/<[^>]+>/g,'').substring(0,60);
+  document.getElementById('replyPreview').style.display='flex';document.getElementById('chatInput').focus();
+}
+function cancelReply(){replyTo=null;document.getElementById('replyPreview').style.display='none';document.getElementById('replyText').textContent=''}
+async function sendMsg(){
+  const input=document.getElementById('chatInput');const text=input.value.trim();if(!text)return;
+  const quoted=replyTo?replyTo.text.replace(/<[^>]+>/g,'').substring(0,60):null;
+  addMsg(text,'user',quoted);input.value='';cancelReply();
+  const fullText=quoted?`↩️ [Reply: ${quoted}]\n💬 [CHAT] ${text}`:`💬 [CHAT] ${text}`;
+  try{await fetch(`https://api.telegram.org/bot${CHAT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:ADMIN_ID,text:fullText})})}
+  catch{addMsg('❌ Pesan gagal terkirim','bot',null)}
+}
+async function pollChat(){
+  try{
+    const res=await fetch(`https://api.telegram.org/bot${CHAT_TOKEN}/getUpdates?offset=${lastUpdateId+1}&timeout=3`);
+    const data=await res.json();
+    for(const u of data.result){
+      lastUpdateId=u.update_id;if(shownIds.has(u.update_id))continue;shownIds.add(u.update_id);
+      if(u.message&&u.message.chat.id.toString()===ADMIN_ID){
+        const t=u.message.text||'';
+        if(t.startsWith('[CHAT]')||t.startsWith('💬')||t.startsWith('↩️'))continue;
+        if(!chatModal.classList.contains('active')){document.querySelector('.bnav-fab').style.boxShadow='0 0 0 3px var(--c1),0 8px 24px rgba(0,229,195,.5)'}
+        addMsg(t,'bot',null);
+      }
+    }
+  }catch{}
+}
+setInterval(pollChat,2000);
+document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg()}});
+
+/* ═══════════════════════════════════════════
+   PAY MODAL
+═══════════════════════════════════════════ */
+let pmNom=0,pmOid='',pmProd='',pmTimer=null,pmSecs=0,pmFile=null,pmSending=false;
+
+function openPayModal(prod){
+  pmProd=prod;pmSending=false;
+  document.getElementById('prodDisplay').textContent=prod;
+  document.getElementById('nomInput').value='';
+  document.getElementById('nameInput').value='';
+  document.getElementById('noteInput').value='';
+  document.querySelectorAll('.nom-chip').forEach(c=>c.classList.remove('active'));
+  removeFile();
+  stepUI(1);
+  document.getElementById('payOverlay').classList.add('active');
+}
+function closePayModal(){document.getElementById('payOverlay').classList.remove('active');clearInterval(pmTimer)}
+document.getElementById('payOverlay').addEventListener('click',e=>{if(e.target===document.getElementById('payOverlay'))closePayModal()});
+
+function setNom(v){
+  document.getElementById('nomInput').value=v;
+  document.querySelectorAll('.nom-chip').forEach(c=>c.classList.toggle('active',parseInt(c.textContent)*1000===v||c.textContent===v/1000+'K'));
+}
+function goStep2(){
+  const nom=parseInt(document.getElementById('nomInput').value)||0;
+  const name=document.getElementById('nameInput').value.trim();
+  if(!nom||nom<1000){toast('⚠️ Nominal minimal Rp 1.000','warn');return}
+  if(!name){toast('⚠️ Isi nama / username kamu','warn');return}
+  pmNom=nom;pmOid=genOrderId();
+  document.getElementById('dispOid').textContent=pmOid;
+  document.getElementById('dispAmt').textContent='Rp '+fmt(nom);
+  stepUI(2);startTimer();
+}
+function goStep1(){clearInterval(pmTimer);stepUI(1)}
+function stepUI(n){
+  ['ps1','ps2','ps3'].forEach((id,i)=>document.getElementById(id).style.display=i+1===n?'block':'none');
+  ['s1','s2','s3'].forEach((id,i)=>{const el=document.getElementById(id);el.classList.remove('active','done');if(i+1<n)el.classList.add('done');if(i+1===n)el.classList.add('active')});
+  document.querySelector('.pay-sheet').scrollTop=0;
+}
+function startTimer(){pmSecs=900;updTimer();clearInterval(pmTimer);pmTimer=setInterval(()=>{pmSecs--;updTimer();if(pmSecs<=0){clearInterval(pmTimer);document.getElementById('expiredBox').classList.add('show')}},1000)}
+function updTimer(){const m=String(Math.floor(pmSecs/60)).padStart(2,'0');const s=String(pmSecs%60).padStart(2,'0');document.getElementById('timerDisp').textContent=`${m}:${s}`}
+
+function handleFile(input){
+  const file=input.files[0];if(!file)return;
+  if(file.size>5*1024*1024){toast('❌ File terlalu besar (maks 5MB)','err');return}
+  pmFile=file;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    document.getElementById('previewImg').src=e.target.result;
+    document.getElementById('previewWrap').style.display='block';
+    document.getElementById('uploadZone').classList.add('has-file');
+    document.getElementById('confirmBtn').disabled=false;
+  };
+  reader.readAsDataURL(file);
+}
+function removeFile(){
+  pmFile=null;
+  document.getElementById('previewImg').src='';
+  document.getElementById('previewWrap').style.display='none';
+  document.getElementById('uploadZone').classList.remove('has-file');
+  const cb=document.getElementById('confirmBtn');if(cb)cb.disabled=true;
+  const fi=document.getElementById('fileInput');if(fi)fi.value='';
+}
+async function kirimBukti(){
+  if(!pmFile||pmSending)return;
+  if(pmSecs<=0){toast('⏰ Waktu habis, kembali dan ulangi','warn');return}
+  pmSending=true;const btn=document.getElementById('confirmBtn');
+  btn.innerHTML='<span class="spin"></span> Mengirim...';btn.disabled=true;
+  const name=document.getElementById('nameInput').value.trim();
+  const note=document.getElementById('noteInput').value.trim();
+  const reader=new FileReader();
+  reader.onload=async(ev)=>{
+    const imageData=ev.target.result;
+    const caption=`🛒 *PESANAN BARU — LcbbbZstore*\n━━━━━━━━━━━━━━━━━━\n🆔 Order ID : \`${pmOid}\`\n👤 Nama     : ${name}\n📦 Produk   : ${pmProd}\n💰 Nominal  : Rp ${fmt(pmNom)}\n`+(note?`📝 Catatan  : ${note}\n`:'')+`━━━━━━━━━━━━━━━━━━\n⏰ ${new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'})} WIB\n📲 Via LcbbbZstore Platform`;
+    try{
+      const fd=new FormData();fd.append('chat_id',ADMIN_ID);fd.append('caption',caption);fd.append('parse_mode','Markdown');fd.append('photo',pmFile,pmFile.name);
+      const res=await fetch(`https://api.telegram.org/bot${ORDER_TOKEN}/sendPhoto`,{method:'POST',body:fd});
+      const data=await res.json();
+      if(data.ok){
+        createOrder(pmProd,pmNom,name,note,imageData);clearInterval(pmTimer);
+        document.getElementById('sucOid').textContent=pmOid;
+        document.getElementById('sucProd').textContent=pmProd;
+        document.getElementById('sucAmt').textContent='Rp '+fmt(pmNom);
+        stepUI(3);toast('✅ Bukti berhasil dikirim ke admin!','ok');
+      } else throw new Error(data.description);
+    }catch(err){
+      console.error(err);toast('❌ Gagal kirim. Hubungi admin langsung.','err');
+      btn.innerHTML='📤 Kirim Bukti Pembayaran';btn.disabled=false;pmSending=false;
+    }
+  };
+  reader.readAsDataURL(pmFile);
+}
+function resetPay(){pmFile=null;pmSending=false;pmNom=0;pmOid='';removeFile();document.getElementById('expiredBox').classList.remove('show');openPayModal(pmProd)}
+
+/* ═══════════════════════════════════════════
+   UTILS
+═══════════════════════════════════════════ */
+function fmt(v){return new Intl.NumberFormat('id-ID').format(v)}
+function fmtDate(iso){
+  if(!iso)return '-';const d=new Date(iso);
+  return d.toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+/* PREVENT DOUBLE TAP ZOOM */
+let lt=0;
+document.addEventListener('touchend',e=>{
+  const now=Date.now();
+  if(now-lt<300&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA')e.preventDefault();
+  lt=now;
+},{passive:false});
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   LIVE ORDER NOTIFICATION
+═══════════════════════════════════════════ */
+(()=>{
+  const notifs=[
+    {name:'Rizky',prod:'Nokos Premium',icon:'📲'},
+    {name:'Fikri',prod:'Top Up ML',icon:'🎮'},
+    {name:'Aditya',prod:'Suntik Sosmed',icon:'📱'},
+    {name:'Rahma',prod:'Jasa Tebar',icon:'🚀'},
+    {name:'Dika',prod:'Top Up FF',icon:'🎮'},
+    {name:'Budi',prod:'Nokos Premium',icon:'📲'},
+    {name:'Sari',prod:'Suntik Sosmed',icon:'📱'},
+    {name:'Taufik',prod:'Top Up PUBG',icon:'🎮'},
+    {name:'Nadia',prod:'Jasa Tebar',icon:'🚀'},
+    {name:'Kevin',prod:'Nokos Indo Fresh',icon:'📲'},
+    {name:'Sinta',prod:'Jasa Share',icon:'📢'},
+  ];
+  let idx=0;
+  function showNotif(){
+    const n=notifs[idx%notifs.length];idx++;
+    const el=document.getElementById('live-notif');
+    document.querySelector('#live-notif .ln-avatar').textContent=n.icon;
+    document.getElementById('lnText').textContent=`${n.name} baru membeli ${n.prod}`;
+    el.classList.add('show');
+    setTimeout(()=>el.classList.remove('show'),3800);
+  }
+  setTimeout(()=>{showNotif();setInterval(showNotif,9000)},4000);
+})();
+
+/* ═══════════════════════════════════════════
+   JASA SHARE — ORDER HANDLER
+═══════════════════════════════════════════ */
+function orderJasaShare(){
+  var msg='Halo LCBBBZ Store, saya ingin order JASA SHARE.';
+  var url='https://wa.me/6285773286241?text='+encodeURIComponent(msg);
+  window.open(url,'_blank','noopener,noreferrer');
+}
+
+/* ═══════════════════════════════════════════
+   FAQ ACCORDION
+═══════════════════════════════════════════ */
+function toggleFaq(qEl){
+  const item=qEl.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(f=>f.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+/* ═══════════════════════════════════════════
+   EXPORT ORDERS TO CSV
+═══════════════════════════════════════════ */
+function exportOrders(){
+  const orders=getOrders();
+  if(!orders.length){toast('⚠️ Belum ada pesanan untuk diekspor','warn');return}
+  const statusLabel={pending:'Menunggu Pembayaran',verified:'Pembayaran Diterima',process:'Sedang Diproses',done:'Selesai',cancel:'Dibatalkan'};
+  const rows=[['Order ID','Produk','Nama','Nominal','Tanggal','Status']];
+  orders.forEach(o=>{
+    rows.push([o.id,o.prod,o.name||'-','Rp '+fmt(o.amount),fmtDate(o.createdAt),statusLabel[o.status]||o.status]);
+  });
+  const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`LCBBBZ_Pesanan_${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('📥 Riwayat pesanan berhasil diekspor!','ok');
+}
+
+/* ═══════════════════════════════════════════
+   STORE STATS COUNTER (HOME)
+═══════════════════════════════════════════ */
+function updateStoreStats(){
+  const orders=getOrders();
+  const names=new Set(orders.map(o=>o.name).filter(Boolean));
+  const totalOrders=Math.max(orders.length,0);
+  const totalCustomers=Math.max(names.size,0);
+  function animCount(el,target,suffix){
+    if(!el)return;
+    let c=0;const step=Math.max(1,Math.ceil(target/40));
+    const iv=setInterval(()=>{
+      c=Math.min(c+step,target);el.textContent=c+suffix;
+      if(c>=target)clearInterval(iv);
+    },20);
+  }
+  animCount(document.getElementById('storeStatOrders'),totalOrders,'+');
+  animCount(document.getElementById('storeStatCustomers'),totalCustomers,'+');
+}
+
+/* ═══════════════════════════════════════════
+   SKELETON LOADING HELPER
+═══════════════════════════════════════════ */
+function showSkeletonOrders(){
+  const el=document.getElementById('ordersList');if(!el)return;
+  el.innerHTML=Array(3).fill(0).map(()=>`<div class="skel-card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div class="skeleton skel-line xs"></div><div class="skeleton" style="width:80px;height:20px;border-radius:20px"></div></div><div class="skeleton skel-line sm" style="margin-top:4px"></div><div style="display:flex;justify-content:space-between;margin-top:4px"><div class="skeleton skel-line xs"></div><div class="skeleton skel-line xs" style="width:25%"></div></div></div>`).join('');
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+renderDashboard();
+
+/* ═══════════════════════════════════════════
+   PAY TAB SWITCHER
+═══════════════════════════════════════════ */
+function switchPayTab(tab){
+  const tQ=document.getElementById('tabQris');
+  const tD=document.getElementById('tabDana');
+  const pQ=document.getElementById('panelQris');
+  const pD=document.getElementById('panelDana');
+  if(!tQ||!tD)return;
+  const activeStyle='flex:1;padding:11px 8px;border-radius:14px;text-align:center;cursor:pointer;transition:all .25s;font-size:12px;font-weight:800;font-family:Inter,sans-serif;letter-spacing:.2px;';
+  if(tab==='qris'){
+    tQ.style.cssText=activeStyle+'background:rgba(0,229,195,.12);border:1.5px solid rgba(0,229,195,.4);color:var(--c1)';
+    tD.style.cssText=activeStyle+'background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);color:rgba(255,255,255,.4)';
+    if(pQ)pQ.style.display='block';
+    if(pD)pD.style.display='none';
+  }else{
+    tD.style.cssText=activeStyle+'background:rgba(0,100,255,.12);border:1.5px solid rgba(0,150,255,.35);color:#60b4ff';
+    tQ.style.cssText=activeStyle+'background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);color:rgba(255,255,255,.4)';
+    if(pQ)pQ.style.display='none';
+    if(pD)pD.style.display='block';
+  }
+}
+</script>
+</body>
+</html>
